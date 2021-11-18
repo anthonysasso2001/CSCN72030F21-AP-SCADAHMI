@@ -17,7 +17,7 @@ AutoPilot HMI for projects 3 course
 <p>
   
   ### Fuel Control
-
+  
   ### Air Speed
 
   ### Cabin / Interior Temp
@@ -51,8 +51,8 @@ AutoPilot HMI for projects 3 course
 ## Extensions & Possible Modules
 <details><summary>CLICK FOR Extensions & Future Modules</summary>
 <p>
-
-** Under Construction
+  
+  *Under Construction*
 
 </p>
 </details>
