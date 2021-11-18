@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>CSCN72030F21_AP_Classes</RootNamespace>
+  </PropertyGroup>
+
+</Project>
