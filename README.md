@@ -22,7 +22,7 @@ AutoPilot HMI for projects 3 course
 
   ### Cabin / Interior Temp
 
-  ### ALtitude
+  ### Altitude
 
   ### Plane Heading
 
@@ -52,7 +52,7 @@ AutoPilot HMI for projects 3 course
 <details><summary>CLICK FOR Extensions & Future Modules</summary>
 <p>
 
-**Under Construction
+** Under Construction
 
 </p>
 </details>
