@@ -2,9 +2,15 @@
 AutoPilot HMI for projects 3 course
 
 ## "Main" Modules
-### AutoPilot
+<details><summary>CLICK FOR GLOBAL / MAIN MODULES</summary>
+<p>
+  
+  ### AutoPilot
 
-### HardwareIO / Abstract Interface
+  ### HardwareIO / Abstract Interface
+
+</p>
+</details>
 
 ## Control Modules
 <details><summary>CLICK FOR CONTROLS</summary>
