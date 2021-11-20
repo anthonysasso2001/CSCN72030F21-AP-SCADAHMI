@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 namespace CSCN72030F21_AP_Classes
 {
-    public class HardwareIO
+    public abstract class HardwareIO
     {
         //Variables
         private string fileName;
@@ -63,9 +63,9 @@ namespace CSCN72030F21_AP_Classes
         }
 
         //abstract functions to be overrided
-        //public abstract bool display(int inputTime);
+        public abstract bool display(int inputTime);
 
-        //public abstract bool modify(string inputValue);
+        public abstract bool modify(string inputValue);
 
         //functions for activity
         public void toggleActive()
