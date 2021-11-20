@@ -4,6 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>CSCN72030F21_AP_Program</RootNamespace>
+    <ApplicationIcon />
+    <Win32Resource></Win32Resource>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CSCN72030F21-AP-Classes\CSCN72030F21-AP-Classes.csproj" />
+  </ItemGroup>
 
 </Project>
