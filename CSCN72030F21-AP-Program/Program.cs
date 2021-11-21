@@ -8,7 +8,23 @@ namespace CSCN72030F21_AP_Program
         static void Main(string[] args)
         {
             const string dataFile = "..\\Data\\";   //"macro for file path
-            Console.WriteLine("true = {0}, false = {1}", Convert.ToInt32(true), Convert.ToInt32(false));
+
+            string[] fileArray=new string[11];
+            fileArray[0] = (dataFile + "WeatherAPIData.txt");
+            fileArray[1] = (dataFile + "ForceAndVibrationData.txt");
+            fileArray[2] = (dataFile + "CabinPressureAndOxygenData.txt");
+            fileArray[3] = (dataFile + "TravelInfoData.txt");
+            fileArray[4] = (dataFile + "ExteriorTempData.txt");
+            fileArray[5] = (dataFile + "LiquidLevelData.txt");
+            fileArray[6] = (dataFile + "FuelControlData.txt");
+            fileArray[7] = (dataFile + "AirSpeedData.txt");
+            fileArray[8] = (dataFile + "InteriorTempData.txt");
+            fileArray[9] = (dataFile + "AltitudeData.txt");
+            fileArray[10] = (dataFile + "HeadingData.txt");
+
+            AutoPilot scadaHmi = new(fileArray);
+            scadaHmi.Menu();
+
             //testing for HardwareIO
             /*
             HardwareIO test = new HardwareIO((dataFile+"test.txt"), true);

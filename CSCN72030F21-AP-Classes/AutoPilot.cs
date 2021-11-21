@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CSCN72030F21_AP_Classes
 {
-    class AutoPilot
+    public class AutoPilot
     {
         private WeatherAPI weather;
         private ForceAndVibration planeFAV;
@@ -58,28 +58,28 @@ namespace CSCN72030F21_AP_Classes
         //coloured box for state
         private void colouredModuleState(int inputState)
         {
-            Console.WriteLine("[");
+            Console.Write("[");
             if (0 == inputState)    //active
             {
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("TRUE");
+                Console.Write("TRUE");
             }
             else if (1 == inputState)   //inactive
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("FALSE");
+                Console.Write("FALSE");
             }
             else if (2 == inputState)   //mix of active and inactive
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("CUSTOM");
+                Console.Write("CUSTOM");
             }
             else
             {
                 //nothing
             }
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("]");
+            Console.Write("]");
         }
         private int boolToInt(bool inputBool)
         {
