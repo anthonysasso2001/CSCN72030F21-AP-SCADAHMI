@@ -8,6 +8,7 @@ namespace CSCN72030F21_AP_Program
         static void Main(string[] args)
         {
             const string dataFile = "..\\Data\\";   //"macro for file path
+            Console.WriteLine("true = {0}, false = {1}", Convert.ToInt32(true), Convert.ToInt32(false));
             //testing for HardwareIO
             /*
             HardwareIO test = new HardwareIO((dataFile+"test.txt"), true);

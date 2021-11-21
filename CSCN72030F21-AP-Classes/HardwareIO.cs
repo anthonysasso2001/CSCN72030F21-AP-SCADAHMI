@@ -57,7 +57,7 @@ namespace CSCN72030F21_AP_Classes
             catch (System.InvalidOperationException E)
             {
                 //Console.WriteLine("Line {0} doesn't exist", position);
-                outputString = "LINE_ERROR {E}";    //if line doesn't exist...
+                outputString = ("LINE_ERROR "+E.Message);    //if line doesn't exist...
             }
             return outputString;
         }
