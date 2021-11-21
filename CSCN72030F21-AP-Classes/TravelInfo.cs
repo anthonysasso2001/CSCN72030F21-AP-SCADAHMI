@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Classes
 {
     public class TravelInfo : HardwareIO
     {
-        TravelInfo(string inputFileName) : base(inputFileName, false)
+        public TravelInfo(string inputFileName) : base(inputFileName, false)
         {
 
         }

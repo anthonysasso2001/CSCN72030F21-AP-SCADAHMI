@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Classes
 {
     public class ExteriorTemp : HardwareIO
     {
-        ExteriorTemp(string inputFileName) : base(inputFileName, false)
+        public ExteriorTemp(string inputFileName) : base(inputFileName, false)
         {
 
         }

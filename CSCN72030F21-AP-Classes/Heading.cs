@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSCN72030F21_AP_Classes
 {
-    class Heading : HardwareIO
+    public class Heading : HardwareIO
     {
-        Heading(string inputFileName) : base(inputFileName, true)
+        public Heading(string inputFileName) : base(inputFileName, true)
         {
 
         }

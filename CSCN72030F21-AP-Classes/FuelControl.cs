@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Classes
 {
     public class FuelControl : HardwareIO
     {
-        FuelControl(string inputFileName) : base(inputFileName, true)
+        public FuelControl(string inputFileName) : base(inputFileName, true)
         {
 
         }

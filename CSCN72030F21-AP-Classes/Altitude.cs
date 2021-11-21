@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSCN72030F21_AP_Classes
 {
-    class Altitude : HardwareIO
+    public class Altitude : HardwareIO
     {
-        Altitude(string inputFileName) : base(inputFileName, true)
+        public Altitude(string inputFileName) : base(inputFileName, true)
         {
 
         }

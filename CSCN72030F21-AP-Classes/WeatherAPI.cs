@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Classes
 {
     public class WeatherAPI: HardwareIO
     {
-        WeatherAPI(string inputFileName): base(inputFileName, false)
+        public WeatherAPI(string inputFileName): base(inputFileName, false)
         {
 
         }

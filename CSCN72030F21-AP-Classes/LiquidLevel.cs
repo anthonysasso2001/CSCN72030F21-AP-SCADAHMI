@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Classes
 {
     public class LiquidLevel : HardwareIO
     {
-        LiquidLevel(string inputFileName) : base(inputFileName, false)
+        public LiquidLevel(string inputFileName) : base(inputFileName, false)
         {
 
         }

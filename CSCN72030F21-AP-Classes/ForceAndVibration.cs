@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Classes
 {
     public class ForceAndVibration : HardwareIO
     {
-        ForceAndVibration(string inputFileName) : base(inputFileName, false)
+        public ForceAndVibration(string inputFileName) : base(inputFileName, false)
         {
 
         }

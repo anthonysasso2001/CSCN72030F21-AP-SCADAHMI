@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Classes
 {
     public class CabinPressureAndOxygen : HardwareIO
     {
-        CabinPressureAndOxygen(string inputFileName) : base(inputFileName, false)
+        public CabinPressureAndOxygen(string inputFileName) : base(inputFileName, false)
         {
 
         }

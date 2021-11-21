@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CSCN72030F21_AP_Classes
 {
-    class AirSpeed : HardwareIO
+    public class AirSpeed : HardwareIO
     {
-        AirSpeed(string inputFileName) : base(inputFileName, true)
+        public AirSpeed(string inputFileName) : base(inputFileName, true)
         {
 
         }
