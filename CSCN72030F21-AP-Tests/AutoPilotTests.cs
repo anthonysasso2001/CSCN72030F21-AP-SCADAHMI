@@ -3,11 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CSCN72030F21_AP_Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class AutoPilotTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void AUT_UNIT_001_input_output_expected()
         {
+
         }
     }
 }
