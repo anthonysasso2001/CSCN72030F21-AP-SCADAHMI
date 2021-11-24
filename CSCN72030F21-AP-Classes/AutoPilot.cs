@@ -59,15 +59,15 @@ namespace CSCN72030F21_AP_Classes
         private void colouredModuleState(int inputState)
         {
             Console.Write("[");
-            if (0 == inputState)    //active
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write("TRUE");
-            }
-            else if (1 == inputState)   //inactive
+            if (0 == inputState)    //inactive
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("FALSE");
+                Console.Write("Manual");
+            }
+            else if (1 == inputState)   //active
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Active");
             }
             else if (2 == inputState)   //mix of active and inactive
             {
@@ -78,7 +78,7 @@ namespace CSCN72030F21_AP_Classes
             {
                 //nothing
             }
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("]");
         }
         private int boolToInt(bool inputBool)
@@ -103,30 +103,32 @@ namespace CSCN72030F21_AP_Classes
             bool menuLoop = true;
             while (menuLoop)
             {
+                bool returnFromSub = false;
                 Console.WriteLine(
                     "Please select a Sub Menu:\n" +
                     "0. Exit Auto Pilot\n" +
                     "1. Sensors Menu\n" +
-                    "2.Controls Menu\n" +
+                    "2. Controls Menu\n" +
                     "3. Manual Overrides\n" +
-                    "4. Toggle AutoPilot\n:");
+                    "4. Toggle AutoPilot\n");
+                Console.Write(":");
 
-                int menuOption = Convert.ToInt32(Console.ReadLine());
+                string menuOption = Console.ReadLine();
 
                 switch (menuOption)
                 {
-                    case 0:
+                    case "0":
                         bool exitLoop = true;
                         while (exitLoop)
                         {
                             Console.WriteLine("Are you sure you want to exit?\n[y/n]: ");
-                            char loopOption = Convert.ToChar(Console.ReadLine());
-                            if ('y' == loopOption)
+                            string loopOption = Console.ReadLine();
+                            if ("y" == loopOption)
                             {
                                 exitLoop = false;
                                 return;
                             }
-                            else if ('n' == loopOption)
+                            else if ("n" == loopOption)
                             {
                                 //do nothing...
                                 exitLoop = false;
@@ -137,44 +139,55 @@ namespace CSCN72030F21_AP_Classes
                             }
                         }
                         break;
-                    case 1:
+                    case "1":
                         this.SensorMenu();
+                        returnFromSub = true;
                         break;
-                    case 2:
+
+                    case "2":
                         this.ControlMenu();
+                        returnFromSub = true;
                         break;
-                    case 3:
+
+                    case "3":
                         this.manualOverrides();
+                        returnFromSub = true;
                         break;
-                    case 4:
+
+                    case "4":
                         this.toggleAutoPilot();
+                        returnFromSub = true;
                         break;
+
                     default:
                         Console.WriteLine("Error, Unknown Input\n Please try Again\n");
                         break;
                 }
-
-                bool continueLoop = true;
-                while (continueLoop)
+                if (false == returnFromSub)
                 {
-                    Console.WriteLine("Would you like to continue?\n[y/n]:");
-                    char loopOption = Convert.ToChar(Console.ReadLine());
-                    if ('y' == loopOption)
+
+                    bool continueLoop = true;
+                    while (continueLoop)
                     {
-                        continueLoop = false;
-                        menuLoop = false;
-                    }
-                    else if ('n' == loopOption)
-                    {
-                        continueLoop = false;
-                        menuLoop = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                        Console.WriteLine("Would you like to continue?\n[y/n]:");
+                        string loopOption = Console.ReadLine();
+                        if ("y" == loopOption)
+                        {
+                            continueLoop = false;
+                            menuLoop = true;
+                        }
+                        else if ("n" == loopOption)
+                        {
+                            continueLoop = false;
+                            menuLoop = false;
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                        }
                     }
                 }
-
             }
         }
 
@@ -185,56 +198,132 @@ namespace CSCN72030F21_AP_Classes
             while (sensorLoop)
             {
 
-                Console.WriteLine("Please select a module to override (by number):\n");
+                Console.WriteLine("Please select a sensor module to access (by number):\n");
 
-                Console.WriteLine("" +
-                    "1. ");
+                Console.WriteLine("0. Exit Sensor Menu\n");
+
+                Console.Write("1. ");
                 colouredModuleState(boolToInt(this.weather.getActivity()));
-                Console.WriteLine("WeatherAPI\n" +
+                Console.WriteLine("WeatherAPI\n"); 
 
-                    "2. ");
+                Console.Write("2. ");
                 colouredModuleState(boolToInt(this.planeFAV.getActivity()));
-                Console.WriteLine("Force & Vibration\n" +
+                Console.WriteLine("Force & Vibration\n"); 
 
-                    "3. ");
+                Console.Write("3. ");
                 colouredModuleState(boolToInt(this.planeCPAO.getActivity()));
-                Console.WriteLine("Cabin Pressure & Oxygen\n" +
+                Console.WriteLine("Cabin Pressure & Oxygen\n");
 
-                    "4. ");
+                Console.Write("4. ");
                 colouredModuleState(boolToInt(this.planeTravelInfo.getActivity()));
-                Console.WriteLine("Travel Info\n" +
+                Console.WriteLine("Travel Info\n");
 
-                    "5. ");
+                Console.Write("5. ");
                 colouredModuleState(boolToInt(this.planeExtTemp.getActivity()));
-                Console.WriteLine("Exterior Temp\n" +
+                Console.WriteLine("Exterior Temp\n");
 
-                    "6. ");
+                Console.Write("6. ");
                 colouredModuleState(boolToInt(this.planeLiquidLevel.getActivity()));
-                Console.WriteLine("Liquid Level\n:");
+                Console.WriteLine("Liquid Level\n");
+
+                Console.Write(":");
 
                 //get input for menu
-                int inputOption = Convert.ToInt32(Console.ReadLine());
-
+                string inputOption = Console.ReadLine();
                 switch (inputOption)
                 {
-                    case 1:
-                        this.WeatherAPISensorOption();
+                    case "0":
+                        bool exitLoop = true;
+                        while (exitLoop)
+                        {
+                            Console.WriteLine("Are you sure you want to exit?\n[y/n]: ");
+                            string loopOption = Console.ReadLine();
+                            if ("y" == loopOption)
+                            {
+                                exitLoop = false;
+                                return;
+                            }
+                            else if ("n" == loopOption)
+                            {
+                                //do nothing...
+                                exitLoop = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                            }
+                        }
                         break;
-                    case 2:
-                        this.ForceAndVibrationSensorOption();
+
+                    case "1":
+                        if (this.weather.getActivity())
+                        {
+                            this.WeatherAPISensorOption();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
+                        }
                         break;
-                    case 3:
-                        this.CabinPressureAndOxygenSensorOption();
+
+                    case "2":
+                        if (this.planeFAV.getActivity())
+                        {
+                            this.ForceAndVibrationSensorOption();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
+                        }
                         break;
-                    case 4:
-                        this.TravelInfoSensorOption();
+
+                    case "3":
+                        if (this.planeCPAO.getActivity())
+                        {
+                            this.CabinPressureAndOxygenSensorOption();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
+                        }
                         break;
-                    case 5:
-                        this.ExteriorTempSensorOption();
+
+                    case "4":
+                        
+                        if (this.planeTravelInfo.getActivity())
+                        {
+                            this.TravelInfoSensorOption();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
+                        }
                         break;
-                    case 6:
-                        this.LiquidLevelSensorOption();
+
+                    case "5":
+                        
+                        if (this.planeExtTemp.getActivity())
+                        {
+                            this.ExteriorTempSensorOption();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
+                        }
                         break;
+
+                    case "6":
+                        
+                        if (this.planeLiquidLevel.getActivity())
+                        {
+                            this.LiquidLevelSensorOption();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
+                        }
+                        break;
+
                     default:
                         Console.WriteLine("Error, Unknown Input\n Please try Again\n");
                         break;
@@ -243,16 +332,17 @@ namespace CSCN72030F21_AP_Classes
                 bool continueLoop = true;
                 while (continueLoop) {
                     Console.WriteLine("Would you like to continue?\n[y/n]:");
-                    char loopOption = Convert.ToChar(Console.ReadLine());
-                    if ('y' == loopOption)
-                    {
-                        continueLoop = false;
-                        sensorLoop = false;
-                    }
-                    else if ('n' == loopOption)
+                    string loopOption = Console.ReadLine();
+                    if ("y" == loopOption)
                     {
                         continueLoop = false;
                         sensorLoop = true;
+                    }
+                    else if ("n" == loopOption)
+                    {
+                        continueLoop = false;
+                        sensorLoop = false;
+                        return;
                     }
                     else
                     {
@@ -292,35 +382,60 @@ namespace CSCN72030F21_AP_Classes
             bool controlLoop = true;
             while (controlLoop)
             {
-                Console.WriteLine("Please select a control module to override (by number):\n");
+                Console.WriteLine("Please select a control module to access (by number):\n");
 
-                Console.WriteLine("" +
-                    "1. ");
+                Console.WriteLine("0. Exit Control Menu\n");
+
+                Console.Write("1. ");
                 colouredModuleState(boolToInt(this.planeFuelControl.getActivity()));
-                Console.WriteLine("Fuel Control\n" +
+                Console.WriteLine("Fuel Control\n");
 
-                    "2. ");
+                Console.Write("2. ");
                 colouredModuleState(boolToInt(this.planeSpeed.getActivity()));
-                Console.WriteLine("Plane Speed\n" +
+                Console.WriteLine("Plane Speed\n");
 
-                    "3. ");
+                Console.Write("3. ");
                 colouredModuleState(boolToInt(this.planeIntTemp.getActivity()));
-                Console.WriteLine("Interior Temp\n" +
+                Console.WriteLine("Interior Temp\n");
 
-                    "4.");
+                Console.Write("4. ");
                 colouredModuleState(boolToInt(this.planeAltitude.getActivity()));
-                Console.WriteLine("Altitude\n" +
+                Console.WriteLine("Altitude\n");
 
-                    "5. ");
+                Console.Write("5. ");
                 colouredModuleState(boolToInt(this.planeHeading.getActivity()));
-                Console.WriteLine("Heading\n:");
+                Console.WriteLine("Heading\n");
+
+                Console.Write(":");
 
                 //get input for menu
-                int inputOption = Convert.ToInt32(Console.ReadLine());
+                string inputOption = Console.ReadLine();
 
                 switch (inputOption)
                 {
-                    case 1:
+                    case "0":
+                        bool exitLoop = true;
+                        while (exitLoop)
+                        {
+                            Console.WriteLine("Are you sure you want to exit?\n[y/n]: ");
+                            string loopOption = Console.ReadLine();
+                            if ("y" == loopOption)
+                            {
+                                exitLoop = false;
+                                return;
+                            }
+                            else if ("n" == loopOption)
+                            {
+                                //do nothing...
+                                exitLoop = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                            }
+                        }
+                        break;
+                    case "1":
                         if (this.planeFuelControl.getActivity())
                         {
                             this.FuelControlControlOption();
@@ -330,7 +445,8 @@ namespace CSCN72030F21_AP_Classes
                             Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
                         }
                         break;
-                    case 2:
+
+                    case "2":
                         if (this.planeSpeed.getActivity())
                         {
                             this.AirSpeedControlOption();
@@ -340,7 +456,8 @@ namespace CSCN72030F21_AP_Classes
                             Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
                         }
                         break;
-                    case 3:
+
+                    case "3":
                         if (this.planeIntTemp.getActivity())
                         {
                             this.CabinTempControlOption();
@@ -350,7 +467,8 @@ namespace CSCN72030F21_AP_Classes
                             Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
                         }
                         break;
-                    case 4:
+
+                    case "4":
                         if (this.planeAltitude.getActivity())
                         {
                             this.AltitudeControlOption();
@@ -360,7 +478,8 @@ namespace CSCN72030F21_AP_Classes
                             Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
                         }
                         break;
-                    case 5:
+
+                    case "5":
                         if (this.planeHeading.getActivity())
                         {
                             this.HeadingControlOption();
@@ -370,6 +489,7 @@ namespace CSCN72030F21_AP_Classes
                             Console.WriteLine("Manual override active, auto pilot is disabled for this module\n");
                         }
                         break;
+
                     default:
                         Console.WriteLine("Error, Unknown Input\n Please try Again\n");
                         break;
@@ -378,16 +498,17 @@ namespace CSCN72030F21_AP_Classes
                 while (continueLoop)
                 {
                     Console.WriteLine("Would you like to continue?\n[y/n]:");
-                    char loopOption = Convert.ToChar(Console.ReadLine());
-                    if ('y' == loopOption)
-                    {
-                        continueLoop = false;
-                        controlLoop = false;
-                    }
-                    else if ('n' == loopOption)
+                    string loopOption = Console.ReadLine();
+                    if ("y" == loopOption)
                     {
                         continueLoop = false;
                         controlLoop = true;
+                    }
+                    else if ("n" == loopOption)
+                    {
+                        continueLoop = false;
+                        controlLoop = false;
+                        return;
                     }
                     else
                     {
@@ -420,129 +541,165 @@ namespace CSCN72030F21_AP_Classes
         //Overrides menu / Toggle Autopilot
         bool manualOverrides()
         {
-            bool menuLoop = true;
-            while (menuLoop)
+            bool overrideLoop = true;
+            while (overrideLoop)
             {
                 //menu options for toggles
                 Console.WriteLine("Please select a module to override (by number):\n");
 
-                Console.WriteLine("" +
-                    "1. ");
-                colouredModuleState(boolToInt(this.weather.getActivity()));
-                Console.WriteLine("WeatherAPI\n" +
-                    
-                    "2. ");
-                colouredModuleState(boolToInt(this.planeFAV.getActivity()));
-                Console.WriteLine("Force & Vibration\n" +
-                    
-                    "3. ");
-                colouredModuleState(boolToInt(this.planeCPAO.getActivity()));
-                Console.WriteLine("Cabin Pressure & Oxygen\n" +
-                    
-                    "4. ");
-                colouredModuleState(boolToInt(this.planeTravelInfo.getActivity()));
-                Console.WriteLine("Travel Info\n" +
-                    
-                    "5. ");
-                colouredModuleState(boolToInt(this.planeExtTemp.getActivity()));
-                Console.WriteLine("Exterior Temp\n" +
-                    
-                    "6. ");
-                colouredModuleState(boolToInt(this.planeLiquidLevel.getActivity()));
-                Console.WriteLine("Liquid Level\n" +
-                    
-                    "7. ");
-                colouredModuleState(boolToInt(this.planeFuelControl.getActivity()));
-                Console.WriteLine("Fuel Control\n" +
-                    
-                    "8. ");
-                colouredModuleState(boolToInt(this.planeSpeed.getActivity()));
-                Console.WriteLine("Plane Speed\n" +
-                    
-                    "9. ");
-                colouredModuleState(boolToInt(this.planeIntTemp.getActivity()));
-                Console.WriteLine("Interior Temp\n" +
-                    
-                    "10.");
-                colouredModuleState(boolToInt(this.planeAltitude.getActivity()));
-                Console.WriteLine("Altitude\n" +
-                    
-                    "11. ");
-                colouredModuleState(boolToInt(this.planeHeading.getActivity()));
-                Console.WriteLine("Heading\n:");
+                Console.WriteLine("0. Exit Manual Override Menu\n");
 
+                Console.Write("1. ");
+                colouredModuleState(boolToInt(this.weather.getActivity()));
+                Console.WriteLine("WeatherAPI\n");
+
+                Console.Write("2. ");
+                colouredModuleState(boolToInt(this.planeFAV.getActivity()));
+                Console.WriteLine("Force & Vibration\n");
+
+                Console.Write("3. ");
+                colouredModuleState(boolToInt(this.planeCPAO.getActivity()));
+                Console.WriteLine("Cabin Pressure & Oxygen\n");
+
+                Console.Write("4. ");
+                colouredModuleState(boolToInt(this.planeTravelInfo.getActivity()));
+                Console.WriteLine("Travel Info\n");
+
+                Console.Write("5. ");
+                colouredModuleState(boolToInt(this.planeExtTemp.getActivity()));
+                Console.WriteLine("Exterior Temp\n");
+
+                Console.Write("6. ");
+                colouredModuleState(boolToInt(this.planeLiquidLevel.getActivity()));
+                Console.WriteLine("Liquid Level\n");
+
+                Console.Write("7. ");
+                colouredModuleState(boolToInt(this.planeFuelControl.getActivity()));
+                Console.WriteLine("Fuel Control\n");
+
+                Console.Write("8. ");
+                colouredModuleState(boolToInt(this.planeSpeed.getActivity()));
+                Console.WriteLine("Plane Speed\n");
+
+                Console.Write("9. ");
+                colouredModuleState(boolToInt(this.planeIntTemp.getActivity()));
+                Console.WriteLine("Interior Temp\n");
+
+                Console.Write("10. ");
+                colouredModuleState(boolToInt(this.planeAltitude.getActivity()));
+                Console.WriteLine("Altitude\n");
+
+                Console.Write("11. ");
+                colouredModuleState(boolToInt(this.planeHeading.getActivity()));
+                Console.WriteLine("Heading\n");
+
+                Console.Write(":");
                 //get input for menu
-                int inputOption = Convert.ToInt32(Console.ReadLine());
+                string inputOption = Console.ReadLine();
 
                 //switch case for menu
                 switch (inputOption)
                 {
-                    case 1:
+                    case "0":
+                        bool exitLoop = true;
+                        while (exitLoop)
+                        {
+                            Console.WriteLine("Are you sure you want to exit?\n[y/n]: ");
+                            string loopOption = Console.ReadLine();
+                            if ("y" == loopOption)
+                            {
+                                exitLoop = false;
+                                return true;
+                            }
+                            else if ("n" == loopOption)
+                            {
+                                //do nothing...
+                                exitLoop = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                            }
+                        }
+                        break;
+
+                    case "1":
                         this.weather.toggleActive();
                         Console.WriteLine("Weather API Module toggled to ");
                         colouredModuleState(boolToInt(this.weather.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 2:
+
+                    case "2":
                         this.planeFAV.toggleActive();
                         Console.WriteLine("Force & Vibration Module toggled to ");
                         colouredModuleState(boolToInt(this.planeFAV.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 3:
+
+                    case "3":
                         this.planeCPAO.toggleActive();
                         Console.WriteLine("Cabin Pressure & Oxygen Module toggled to ");
                         colouredModuleState(boolToInt(this.planeCPAO.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 4:
+
+                    case "4":
                         this.planeTravelInfo.toggleActive();
                         Console.WriteLine("Travel Info Module toggled to ");
                         colouredModuleState(boolToInt(this.planeTravelInfo.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 5:
+
+                    case "5":
                         this.planeExtTemp.toggleActive();
                         Console.WriteLine("Exterior Temperature Module toggled to ");
                         colouredModuleState(boolToInt(this.planeExtTemp.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 6:
+
+                    case "6":
                         this.planeLiquidLevel.toggleActive();
                         Console.WriteLine("Liquid Level Module toggled to ");
                         colouredModuleState(boolToInt(this.planeLiquidLevel.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 7:
+
+                    case "7":
                         this.planeFuelControl.toggleActive();
                         Console.WriteLine("Fuel Control Module toggled to ");
                         colouredModuleState(boolToInt(this.planeFuelControl.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 8:
+
+                    case "8":
                         this.planeSpeed.toggleActive();
                         Console.WriteLine("Plane Speed Module toggled to ");
                         colouredModuleState(boolToInt(this.planeSpeed.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 9:
+
+                    case "9":
                         this.planeIntTemp.toggleActive();
                         Console.WriteLine("Interior Temperature Module toggled to ");
                         colouredModuleState(boolToInt(this.planeIntTemp.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 10:
+
+                    case "10":
                         this.planeAltitude.toggleActive();
                         Console.WriteLine("Altitude Module toggled to ");
                         colouredModuleState(boolToInt(this.planeAltitude.getActivity()));
                         Console.WriteLine("\n");
                         break;
-                    case 11:
+
+                    case "11":
                         this.planeHeading.toggleActive();
                         Console.WriteLine("Heading Module toggled to ");
                         colouredModuleState(boolToInt(this.planeHeading.getActivity()));
                         Console.WriteLine("\n");
                         break;
+
                     default:
                         Console.WriteLine("Error, Unknown Input\n Please try Again\n");
                         break;
@@ -551,16 +708,17 @@ namespace CSCN72030F21_AP_Classes
                 while (continueLoop)
                 {
                     Console.WriteLine("Would you like to continue?\n[y/n]:");
-                    char loopOption = Convert.ToChar(Console.ReadLine());
-                    if ('y' == loopOption)
+                    string loopOption = Console.ReadLine();
+                    if ("y" == loopOption)
                     {
                         continueLoop = false;
-                        menuLoop = false;
+                        overrideLoop = true;
                     }
-                    else if ('n' == loopOption)
+                    else if ("n" == loopOption)
                     {
                         continueLoop = false;
-                        menuLoop = true;
+                        overrideLoop = false;
+                        return true;
                     }
                     else
                     {
@@ -569,8 +727,8 @@ namespace CSCN72030F21_AP_Classes
                 }
             }
 
-            //unsure what false case to pass, can be worked out later?
-            return true;
+            //unsure what false case to pass, should return false if they miss the exit option and it reaches this point??
+            return false;
         }
         bool toggleAutoPilot()
         {
@@ -588,8 +746,8 @@ namespace CSCN72030F21_AP_Classes
                 this.planeAltitude,
                 this.planeHeading};
 
-            bool menuLoop = true;
-            while (menuLoop)
+            bool toggleLoop = true;
+            while (toggleLoop)
             {
                 int falseCount = 0;
                 for(int i = 0; i < moduleArray.Length; i++)
@@ -615,18 +773,18 @@ namespace CSCN72030F21_AP_Classes
                 Console.WriteLine("AutoPilot state = ");
                 colouredModuleState(this.autoPilotState);
                 Console.WriteLine("\nToggle Auto Pilot to true or false? [t/f]:");
-                char inputOption = Convert.ToChar(Console.ReadLine());
+                string inputOption = Console.ReadLine();
 
-                if ('t' == inputOption)
+                if ("t" == inputOption)
                 {
                     this.autoPilotState = 1;
-                    menuLoop = false;
+                    toggleLoop = false;
                 }
-                else if ('f' == inputOption)
+                else if ("f" == inputOption)
                 {
                     this.autoPilotState = 0;
                     //do nothing since they do not want to change it
-                    menuLoop = false;
+                    toggleLoop = false;
                 }
                 else
                 {
