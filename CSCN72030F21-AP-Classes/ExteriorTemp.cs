@@ -19,12 +19,12 @@ namespace CSCN72030F21_AP_Classes
             Console.Write("The current exterior temperature is:");
             if(extTemp < (-40))
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write(fileGet(0) + "\n");
             }
             else if(extTemp >50)
             {
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(fileGet(0) + "\n");
             }
             else
