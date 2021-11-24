@@ -16,7 +16,7 @@ namespace CSCN72030F21_AP_Classes
         public override bool display(int inputTime)
         {
                 int interiorTemp = Int32.Parse(fileGet(0));
-                Console.Write("The current exterior temperature is:");
+                Console.Write("The current interior temperature is:");
             if (interiorTemp < (16))
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
