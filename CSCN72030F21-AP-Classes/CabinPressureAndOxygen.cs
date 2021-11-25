@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CSCN72030F21_AP_Classes
@@ -29,27 +30,15 @@ namespace CSCN72030F21_AP_Classes
             {
                 if (!this.checkPressureBounds(displayData[i]))
                 {
-                    if(false == this.pressureResponseWarning(displayData[i]))
-                    {
-                        double pressureWarningAmount = this.pressureWarningDiff(displayData[i]);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("WARNING");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.Write("plane pressure: {0} psi, Oxygen Level: {1}%\n Pressure is {2} psi out of bounds", displayData[i], displayData[i + 1], pressureWarningAmount);
-                        displayState = false;
-                    }
+                    double[] responseValues = new double[] { displayData[0], displayData[1] };
+                    this.pressureResponseWarning(responseValues);
+                    displayState = false;
                 }
                 else if (!this.checkOxygenBounds(Convert.ToInt32(displayData[i+1])))
                 {
-                    if(false == this.oxygenLevelResponseWarning(Convert.ToInt32(displayData[i + 1])))
-                    {
-                        double oxygenWarningAmount = this.oxygenWarningDiff(Convert.ToInt32(displayData[i]));
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write("WARNING");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                        Console.Write("plane pressure: {0} psi, Oxygen Level: {1}%\n Oxygen is {2}% out of bounds", displayData[i], displayData[i + 1], oxygenWarningAmount);
-                        displayState = false;
-                    }
+                    double[] responseValues = new double[] { displayData[0], displayData[1] };
+                    this.oxygenLevelResponseWarning(responseValues);
+                    displayState = false;
                 }
                 else
                 {
@@ -178,18 +167,36 @@ namespace CSCN72030F21_AP_Classes
         private double[] getAndFormatData(int inputTime)
         {
             double[] outputDouble = new double[] { 0 };
+            outputDouble[0] = inputTime;    //pos 0 is input time for consistency
+
+            for (int i = 1; i < (inputTime + 1); i+=2)  //step through by 2 and input pressure & oxygen values
+            {
+                string unformattedString = this.fileGet(i);
+                double[] formattedValues = Array.ConvertAll(unformattedString.Split(','), Double.Parse);
+
+                outputDouble[i] = formattedValues[0];
+                outputDouble[i + 1] = formattedValues[1];
+            }
+            
             return outputDouble;
         }
 
-        private bool pressureResponseWarning(double inputPressure)
+        private void pressureResponseWarning(double[] inputResponseValues)  //warning for pressure values
         {
-            return true;
+            double pressureWarningAmount = this.pressureWarningDiff(inputResponseValues[0]);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("WARNING");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("plane pressure: {0} psi, Oxygen Level: {1}%\n Pressure is {2} psi out of bounds", inputResponseValues[0], inputResponseValues[1], pressureWarningAmount);
         }
 
-        private bool oxygenLevelResponseWarning(int inputOLevel)
+        private void oxygenLevelResponseWarning(double[] inputResponseValues)   //warning for oxygen levels
         {
-            return true;
+            double oxygenWarningAmount = this.oxygenWarningDiff(Convert.ToInt32(inputResponseValues[0]));
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("WARNING");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Write("plane pressure: {0} psi, Oxygen Level: {1}%\n Oxygen is {2}% out of bounds", inputResponseValues[0], inputResponseValues[1], oxygenWarningAmount);
         }
-
     }
 }
