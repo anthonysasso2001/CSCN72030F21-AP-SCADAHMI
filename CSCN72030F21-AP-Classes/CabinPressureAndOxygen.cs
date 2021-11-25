@@ -22,6 +22,24 @@ namespace CSCN72030F21_AP_Classes
             this.maxOLevelBound = 25;
         }
 
+        private double getMinPressureBound()
+        {
+            return this.minPressureBound;
+        }
+        private double getMaxPressureBound()
+        {
+            return this.maxPressureBound;
+        }
+
+        private int getMinOxygenBound()
+        {
+            return this.minOLevelBound;
+        }
+        private int getMaxOxygenBound()
+        {
+            return this.maxOLevelBound;
+        }
+
         public override bool display(int inputTime)
         {
             double[] displayData = this.getAndFormatData(inputTime);
@@ -86,14 +104,14 @@ namespace CSCN72030F21_AP_Classes
         private double pressureWarningDiff(double inputPressure)    //5psi danger, 9psi warning, 11-12 psi normal, 14 psi warning, 17 psi danger
         {
             double outputDifferential = 0;
-            double minWarningBound = (this.minPressureBound + 4);
-            double maxWarningBound = (this.maxPressureBound - 3);
+            double minWarningBound = (this.getMinPressureBound() + 4);
+            double maxWarningBound = (this.getMaxPressureBound() - 3);
             if (this.minPressureBound >= inputPressure) //if pressure is equal to or under 5
             {
-                outputDifferential = this.minPressureBound - inputPressure;
+                outputDifferential = this.getMinPressureBound() - inputPressure;
                 throw new PressureTooLowException(outputDifferential);
             }
-            else if ((this.minPressureBound < inputPressure) && (minWarningBound >= inputPressure))  //if pressure is between 6-9
+            else if ((this.getMinPressureBound() < inputPressure) && (minWarningBound >= inputPressure))  //if pressure is between 6-9
             {
                 outputDifferential = inputPressure - (minWarningBound + 1);
                 
@@ -102,13 +120,13 @@ namespace CSCN72030F21_AP_Classes
             {
                outputDifferential = 0;   //incase it passes through a valid pressure...
             }
-            else if ((this.maxPressureBound > inputPressure) && (maxWarningBound <= inputPressure))    //if pressure is between 15-16
+            else if ((this.getMaxPressureBound() > inputPressure) && (maxWarningBound <= inputPressure))    //if pressure is between 15-16
             {
                 outputDifferential = inputPressure - (maxWarningBound - 1);
             }
-            else if (this.maxPressureBound <= inputPressure) //if pressure is equal to or over 17
+            else if (this.getMaxPressureBound() <= inputPressure) //if pressure is equal to or over 17
             {
-                outputDifferential = inputPressure - this.maxPressureBound;
+                outputDifferential = inputPressure - this.getMaxPressureBound();
                 throw new PressureTooHighException(outputDifferential);
             }
             return outputDifferential;
@@ -117,14 +135,14 @@ namespace CSCN72030F21_AP_Classes
         private int oxygenWarningDiff(int inputOxygen)    //<16% = danger, 16-19% warning, 19-23%  normal, 23-25% warning, >25% = danger
         {
             int outputDifferential = 0;
-            int minWarningBound = (this.minOLevelBound + 3);
-            int maxWarningBound = (this.maxOLevelBound - 2);
+            int minWarningBound = (this.getMinOxygenBound() + 3);
+            int maxWarningBound = (this.getMaxOxygenBound() - 2);
             if (this.minOLevelBound >= inputOxygen) //if pressure is equal to or under 16%
             {
-                outputDifferential = inputOxygen - (this.minOLevelBound + 1);
+                outputDifferential = inputOxygen - (this.getMinOxygenBound() + 1);
                 throw new OxygenTooLowException(outputDifferential);
             }
-            else if ((this.minOLevelBound < inputOxygen) && (minWarningBound >= inputOxygen))  //if oxygen level is between 17-19%
+            else if ((this.getMinOxygenBound() < inputOxygen) && (minWarningBound >= inputOxygen))  //if oxygen level is between 17-19%
             {
                 outputDifferential = inputOxygen - (minWarningBound + 1);
             }
@@ -132,13 +150,13 @@ namespace CSCN72030F21_AP_Classes
             {
                 outputDifferential = 0;   //incase it passes through a valid O level...
             }
-            else if ((this.maxOLevelBound > inputOxygen) && (maxWarningBound <= inputOxygen))    //if oxygen is 24%
+            else if ((this.getMaxOxygenBound() > inputOxygen) && (maxWarningBound <= inputOxygen))    //if oxygen is 24%
             {
                 outputDifferential = inputOxygen - (maxWarningBound - 1);
             }
-            else if (this.maxOLevelBound <= inputOxygen) //if oxygen is equal to or above 25%
+            else if (this.getMaxOxygenBound() <= inputOxygen) //if oxygen is equal to or above 25%
             {
-                outputDifferential = inputOxygen - this.maxOLevelBound-1;
+                outputDifferential = inputOxygen - this.getMaxOxygenBound()-1;
                 throw new OxygenTooHighException(outputDifferential);
             }
             return outputDifferential;
@@ -146,8 +164,8 @@ namespace CSCN72030F21_AP_Classes
 
         private bool checkPressureBounds(double pressureValue)
         {
-            double minWarningBound = (this.minPressureBound + 4);
-            double maxWarningBound = (this.maxPressureBound - 3);
+            double minWarningBound = (this.getMinPressureBound() + 4);
+            double maxWarningBound = (this.getMaxPressureBound() - 3);
             if (minWarningBound >= pressureValue) //if pressure is under 9
             {
                 return false;
@@ -164,8 +182,8 @@ namespace CSCN72030F21_AP_Classes
 
         private bool checkOxygenBounds(int oxygenValue)
         {
-            int minWarningBound = (this.minOLevelBound + 3);
-            int maxWarningBound = (this.maxOLevelBound - 2);
+            int minWarningBound = (this.getMinOxygenBound() + 3);
+            int maxWarningBound = (this.getMaxOxygenBound() - 2);
             if (minWarningBound >= oxygenValue) //if oxygen is under 19%
             {
                 return false;
