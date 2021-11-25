@@ -361,7 +361,13 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool CabinPressureAndOxygenSensorOption()
         {
-            return true;
+            Console.WriteLine("Cabin Pressure & Oxygen Menu");
+            Console.WriteLine("Select how long to review the sensor");
+            Console.Write(":");
+            string userInput = Console.ReadLine();
+            int inputTime = Convert.ToInt32(userInput);
+            bool CPAOState = this.showInfo(this.planeCPAO, inputTime);
+            return CPAOState;
         }
         private bool TravelInfoSensorOption()
         {
