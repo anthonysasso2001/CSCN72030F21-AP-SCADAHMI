@@ -95,7 +95,7 @@ namespace CSCN72030F21_AP_Classes
             }
             else if ((this.minPressureBound < inputPressure) && (minWarningBound >= inputPressure))  //if pressure is between 6-9
             {
-                outputDifferential = (minWarningBound + 1) - inputPressure;
+                outputDifferential = inputPressure - (minWarningBound + 1);
                 
             }
             else if ((minWarningBound < inputPressure) && (maxWarningBound > inputPressure)) //if pressure is in normal bounds 10-14
@@ -146,9 +146,9 @@ namespace CSCN72030F21_AP_Classes
 
         private bool checkPressureBounds(double pressureValue)
         {
-            double minWarningBound = (this.minPressureBound + 3);
-            double maxWarningBound = (this.maxPressureBound - 2);
-            if (minWarningBound >= pressureValue) //if pressure is under 8
+            double minWarningBound = (this.minPressureBound + 4);
+            double maxWarningBound = (this.maxPressureBound - 3);
+            if (minWarningBound >= pressureValue) //if pressure is under 9
             {
                 return false;
             }
