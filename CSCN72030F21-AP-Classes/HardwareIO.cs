@@ -22,6 +22,12 @@ namespace CSCN72030F21_AP_Classes
         }
 
         //file IO stuff
+        public class FileIOFormatException : System.Exception
+        {
+            public FileIOFormatException(int lineNum, string fileName)
+              : base(String.Format("error reading line #{0} form file: {1}", lineNum, fileName)) { }
+        }
+
         public string getFileName()
         {
             return this.fileName;

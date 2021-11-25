@@ -63,7 +63,7 @@ namespace CSCN72030F21_AP_Classes
                     displayState = false;
                 }
             }
-            return displayState;    //true for no errors, false is a warning was called (errors interrupt and exit so not handled here
+            return displayState;    //true for no errors, false is a warning was called (errors interrupt and exit so not handled here)
         }
 
         public override bool modify(string inputValue)
@@ -94,19 +94,13 @@ namespace CSCN72030F21_AP_Classes
             public OxygenTooHighException(int inputOxygen)
               : base(String.Format("plane pressure is {0}% over acceptable limit", inputOxygen)) { }
         }
-
-        public class FileIOFormatException : System.Exception
-        {
-            public FileIOFormatException(int lineNum, string fileName)
-              : base(String.Format("error reading line #{0} form file: {1}", lineNum, fileName)) { }
-        }
         
         private double pressureWarningDiff(double inputPressure)    //5psi danger, 9psi warning, 11-12 psi normal, 14 psi warning, 17 psi danger
         {
             double outputDifferential = 0;
             double minWarningBound = (this.getMinPressureBound() + 4);
             double maxWarningBound = (this.getMaxPressureBound() - 3);
-            if (this.minPressureBound >= inputPressure) //if pressure is equal to or under 5
+            if (this.getMinPressureBound() >= inputPressure) //if pressure is equal to or under 5
             {
                 outputDifferential = this.getMinPressureBound() - inputPressure;
                 throw new PressureTooLowException(outputDifferential);
@@ -137,7 +131,7 @@ namespace CSCN72030F21_AP_Classes
             int outputDifferential = 0;
             int minWarningBound = (this.getMinOxygenBound() + 3);
             int maxWarningBound = (this.getMaxOxygenBound() - 2);
-            if (this.minOLevelBound >= inputOxygen) //if pressure is equal to or under 16%
+            if (this.getMinOxygenBound() >= inputOxygen) //if pressure is equal to or under 16%
             {
                 outputDifferential = inputOxygen - (this.getMinOxygenBound() + 1);
                 throw new OxygenTooLowException(outputDifferential);
@@ -206,7 +200,6 @@ namespace CSCN72030F21_AP_Classes
             int outputCount = 1;
             int lineNum = 1;
             int iterationCount = 0;
-            bool getLoop = true;
             Regex expectedOutput = new Regex("^([0-9]+.?[0-9]*|.[0-9]+),[0-9]+$");    //regex for [any amount of digits] [.] [any amount of digits] [,] [any amount of digits]
             //([0-9]+.?[0-9]*|.[0-9]+),[0-9]+
             while (iterationCount < inputTime)
