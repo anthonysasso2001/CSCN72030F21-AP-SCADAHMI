@@ -365,6 +365,8 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool TravelInfoSensorOption()
         {
+            int inputTime = 6;
+            planeTravelInfo.display(inputTime);
             return true;
         }
         private bool ExteriorTempSensorOption()
