@@ -365,11 +365,28 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool TravelInfoSensorOption()
         {
-            int inputTime = 0;
-            Console.WriteLine("Please input the amount of seconds you would like to view the data for Travel Information:");
-            inputTime = int.Parse(Console.ReadLine());
-
-            planeTravelInfo.display(inputTime);
+            bool loopStatus = true;
+            while (loopStatus)
+            {
+                int inputTimeConvert = 0;
+                Console.WriteLine("Please input the amount of seconds you would like to view the data for Travel Information for, or press q to go back to the previous menu:");
+                string inputTime = Console.ReadLine();
+                if (int.TryParse(inputTime, out inputTimeConvert) && inputTimeConvert > 0)
+                {
+                    bool travelInfoState = this.showInfo(this.planeTravelInfo, inputTimeConvert);
+                    return travelInfoState;
+                }
+                else if(inputTime == "q")
+                {
+                    Console.WriteLine("Returning to the previous menu");
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please try again or enter 'q' to return to the menu");
+                }
+            }
+            
             return true; 
         }
         private bool ExteriorTempSensorOption()
