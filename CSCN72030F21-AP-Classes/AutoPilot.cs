@@ -552,8 +552,9 @@ namespace CSCN72030F21_AP_Classes
                 Console.WriteLine("1. Display current fuel readings");
                 Console.WriteLine("2. Modify fuel levels");
 
-
                 string input = Console.ReadLine();
+                //inputConvert = Convert.ToInt32(input);
+
                 if (int.TryParse(input, out inputConvert) && inputConvert == 1)
                 {
                     bool innerStatus = true;
@@ -610,7 +611,7 @@ namespace CSCN72030F21_AP_Classes
                         }
                     }
                 }
-                else if (inputConvert == 0)
+                else if (input == "0")
                 {
                     Console.WriteLine("Returning to the previous menu");
                     return false;
@@ -618,9 +619,12 @@ namespace CSCN72030F21_AP_Classes
                 else
                 {
                     Console.WriteLine("Invalid input, please try again");
-                    continue;
+                    //continue;
                 }
+                //continue;
             }
+
+
             return true;
         }
         private bool AirSpeedControlOption()
