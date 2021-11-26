@@ -46,6 +46,7 @@ namespace CSCN72030F21_AP_Classes
             bool displayState = true;
             for (int i = 1; i < (2*inputTime+1); i+=2)
             {
+                System.Threading.Thread.Sleep(1000);    //wait 1 second before continuing
                 if (this.checkPressureBounds(displayData[i]) && this.checkOxygenBounds(Convert.ToInt32(displayData[i + 1])))
                 {
                     Console.WriteLine("plane Pressure: {0}, Oxygen Level: {1}\n", Math.Round(displayData[i],2), displayData[i + 1]);

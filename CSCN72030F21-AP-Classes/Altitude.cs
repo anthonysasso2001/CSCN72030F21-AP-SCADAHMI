@@ -32,8 +32,10 @@ namespace CSCN72030F21_AP_Classes
         {
             double[] displayData = this.getAndFormatData(inputTime);
             bool displayState = true;
+
             for (int i = 1; i < (inputTime + 1); i ++)
             {
+                System.Threading.Thread.Sleep(1000);    //wait 1 second before continuing
                 if (this.checkHeightBounds(displayData[i]))
                 {
                     Console.WriteLine("plane is at {0} feet\n", Math.Round(displayData[i], 2));
@@ -155,7 +157,7 @@ namespace CSCN72030F21_AP_Classes
                     outputValue = Math.Round(currentHeight + (incrementMultiplier * i), 2);
                 }
                 outputArray[i] = outputValue;
-                Console.WriteLine("position {0} = {1}", i, outputValue);
+                //Console.WriteLine("position {0} = {1}", i, outputValue);
             }
             string formattedOutput = "";
 
