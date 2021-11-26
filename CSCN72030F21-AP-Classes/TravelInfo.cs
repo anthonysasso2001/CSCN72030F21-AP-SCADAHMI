@@ -38,8 +38,6 @@ namespace CSCN72030F21_AP_Classes
                 this.distance = double.Parse(splitLine[0]);
                 this.time = double.Parse(splitLine[1]);
 
-                //Console.WriteLine("Distance until arrival: {0}KM", this.distance);
-                //Console.WriteLine("Time until arrival: {0}H", this.time);
 
                 if (this.distance <= 500)
                 {
