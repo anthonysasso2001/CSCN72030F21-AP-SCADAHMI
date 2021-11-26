@@ -31,7 +31,7 @@ namespace CSCN72030F21_AP_Classes
                     this.warningMessage(currentTemp);
                     Thread.Sleep(3000); //Sleep for 3 sec
                 }
-                Console.Write("The current exterior temperature is:" + currentTemp);
+                Console.Write("The current exterior temperature is:" + currentTemp+" Celsius degrees");
                 countLine++;
                 
                 if (countLine == lineTotal)     //Stop if reached the last line
