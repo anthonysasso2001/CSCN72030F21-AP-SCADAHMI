@@ -524,10 +524,11 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool FuelControlControlOption()
         {
+            string inputValue = "10";
+            planeFuelControl.modify(inputValue);
+            //int inputTime = 6;
 
-            int inputTime = 5;
-
-            planeFuelControl.display(inputTime);
+            //planeFuelControl.display(inputTime);
             return true;
         }
         private bool AirSpeedControlOption()

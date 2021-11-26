@@ -26,6 +26,7 @@ namespace CSCN72030F21_AP_Classes
             int lineCount = File.ReadAllLines(this.getFileName()).Count();
 
             int count = 0;
+            int countFactor = 1;
 
             for (int i = 1; i < inputTime + 1; i++)
             {
@@ -53,9 +54,10 @@ namespace CSCN72030F21_AP_Classes
 
                 count++;
 
-                if(count == lineCount)
+                if(count == lineCount * countFactor)
                 {
                     i = 0;
+                    countFactor++;
                 }
                 if(count == inputTime)
                 {

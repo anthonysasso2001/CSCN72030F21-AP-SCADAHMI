@@ -24,6 +24,7 @@ namespace CSCN72030F21_AP_Classes
             int lineCount = File.ReadAllLines(this.getFileName()).Count();
 
             int count = 0;
+            int countFactor = 1;
 
             for (int i = 1; i < inputTime + 1; i++)
             {
@@ -45,9 +46,10 @@ namespace CSCN72030F21_AP_Classes
 
                 count++;
 
-                if (count == lineCount)
+                if (count == lineCount * countFactor)
                 {
                     i = 0;
+                    countFactor++;
                 }
                 if (count == inputTime)
                 {
@@ -62,7 +64,20 @@ namespace CSCN72030F21_AP_Classes
         }
         public override bool modify(string inputValue)
         {
+            double fuelModify = Convert.ToDouble(inputValue);
 
+            double fuelStart = 70;
+            double fuelDiff = fuelStart - fuelModify;
+
+            string newFuelReadings = "";
+
+            for(int i = 1; i < fuelModify + 1; i++)
+            {
+                double newFuel = fuelStart - i;
+                newFuelReadings += Convert.ToString(newFuel) + "\n";
+            }
+
+            bool newStatus = this.fileUpdate(newFuelReadings);
 
             return true;
         }
