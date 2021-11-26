@@ -548,6 +548,10 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool CabinTempControlOption()
         {
+            Console.WriteLine("Enter a temperature (Celsius) that you want to set for the cabin (Between 16 and 30 degrees is recommended):");
+            string inputValue =  Console.ReadLine();
+            planeIntTemp.modify(inputValue);
+
             return true;
         }
         private bool AltitudeControlOption()

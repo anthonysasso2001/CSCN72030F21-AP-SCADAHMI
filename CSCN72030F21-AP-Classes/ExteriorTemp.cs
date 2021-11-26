@@ -12,16 +12,7 @@ namespace CSCN72030F21_AP_Classes
         public ExteriorTemp(string inputFileName) : base(inputFileName, false)
         {
             maxTemp = 50;
-            minTemp = 40; 
-        }
-         
-        private double getMinTemp()
-        {
-            return this.minTemp;
-        }
-        private double getMaxTemp()
-        {
-            return this.maxTemp;
+            minTemp = -40; 
         }
         public override bool display(int inputTime)
         {
@@ -40,7 +31,7 @@ namespace CSCN72030F21_AP_Classes
                     this.warningMessage(currentTemp);
                     Thread.Sleep(3000); //Sleep for 3 sec
                 }
-                Console.Write("The current exterior temperature is:");
+                Console.Write("The current exterior temperature is:" + currentTemp);
                 countLine++;
                 
                 if (countLine == lineTotal)     //Stop if reached the last line
@@ -68,7 +59,7 @@ namespace CSCN72030F21_AP_Classes
         {
             if (checkTempBounds(currentTemp))
             { 
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("WARNING!!\nExterior temperature is extreme!");          
             }
          
