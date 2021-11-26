@@ -398,7 +398,29 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool TravelInfoSensorOption()
         {
-            return true;
+            bool loopStatus = true;
+            while (loopStatus)
+            {
+                int inputTimeConvert = 0;
+                Console.WriteLine("Please input the amount of seconds you would like to view the data for Travel Information for, or press q to go back to the previous menu:");
+                string inputTime = Console.ReadLine();
+                if (int.TryParse(inputTime, out inputTimeConvert) && inputTimeConvert > 0)
+                {
+                    bool travelInfoState = this.showInfo(this.planeTravelInfo, inputTimeConvert);
+                    return travelInfoState;
+                }
+                else if(inputTime == "q")
+                {
+                    Console.WriteLine("Returning to the previous menu");
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please try again or enter 'q' to return to the menu");
+                }
+            }
+            
+            return true; 
         }
         private bool ExteriorTempSensorOption()
         {
@@ -552,6 +574,84 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool FuelControlControlOption()
         {
+            bool loopStatus = true;
+            while(loopStatus)
+            {
+                int inputConvert = 0;
+
+                Console.WriteLine("Fuel Control menu options:\n");
+                Console.WriteLine("0. Go back to previous menu");
+                Console.WriteLine("1. Display current fuel readings");
+                Console.WriteLine("2. Modify fuel levels");
+
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out inputConvert) && inputConvert == 1)
+                {
+                    bool innerStatus = true;
+                    while (innerStatus)
+                    {
+                        int inputTimeConvert = 0;
+                        Console.WriteLine("Please input the number of seconds you would like to view the fuel readings for, or press q to go back to the previous menu:");
+                        string inputTime = Console.ReadLine();
+                        if (int.TryParse(inputTime, out inputTimeConvert) && inputTimeConvert > 0)
+                        {
+                            bool fuelState = this.showInfo(this.planeFuelControl, inputTimeConvert);
+                            return fuelState;
+                        }
+                        else if (inputTime == "q")
+                        {
+                            Console.WriteLine("Returning to the previous menu");
+                            return false;
+                            //continue;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input, please try again or enter 'q' to return to the previous menu");
+                        }
+                    }
+                    continue;
+                }
+                else if(int.TryParse(input, out inputConvert) && inputConvert == 2)
+                {
+
+                    bool innerStatus = true;
+                    int fuelCheck = 0;
+                    while (innerStatus)
+                    {
+                        Console.WriteLine("Please enter the amount of fuel % to dump between 5 and 20 or enter 'q' to go back ");
+                        string fuelInput = Console.ReadLine();
+
+                        if(int.TryParse(fuelInput, out fuelCheck) && fuelCheck >= 5 && fuelCheck <= 20)
+                        {
+                            bool fuelState = this.changeInfo(this.planeFuelControl, fuelInput);
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("The fuel has been successfully dropped.");
+                            Console.ForegroundColor = ConsoleColor.Gray;
+
+                            return fuelState;
+                        }
+                        else if(fuelInput == "q")
+                        {
+                            Console.WriteLine("Returning to the previous menu");
+                            innerStatus = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input, please try again or enter 'q' to return to the previous menu");
+                        }
+                    }
+                }
+                else if (input == "0")
+                {
+                    Console.WriteLine("Returning to the previous menu");
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please try again");
+                }
+            }
             return true;
         }
         private bool AirSpeedControlOption()
