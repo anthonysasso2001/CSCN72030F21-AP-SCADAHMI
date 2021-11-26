@@ -17,27 +17,31 @@ namespace CSCN72030F21_AP_Classes
         public override bool display(int inputTime)
         {
             int lineTotal = File.ReadAllLines(this.getFileName()).Count();
-            int countLine = 1;
-
-            for (int i = 1; i <= inputTime; i++)
+            int currentLine = 1;
+            int termination = 1;
+            bool repeat=true;
+            int i = 1;
+            while (termination <= inputTime)
             {
-                if (fileGet(i - 1) == null) //check if the line is empty
-                    break;
 
-                double currentTemp = Double.Parse(fileGet(i-1));
-                
+                if (this.fileGet(currentLine) == "LINE_ERROR Sequence contains no elements") //if the line is empty and the input time is longer, loop back
+                {
+                    currentLine = 1;
+                    continue;
+                }
+                double currentTemp = Double.Parse(fileGet(currentLine));
+
                 if (!checkTempBounds(currentTemp))
                 {
                     this.warningMessage(currentTemp);
                     Thread.Sleep(3000); //Sleep for 3 sec
                 }
-                Console.Write("The current exterior temperature is:" + currentTemp+" Celsius degrees");
-                countLine++;
-                
-                if (countLine == lineTotal)     //Stop if reached the last line
-                    break;
+                Console.WriteLine("The current exterior temperature is:" + currentTemp + " Celsius degrees");
+                currentLine++;
+                termination++;
 
                 Thread.Sleep(1000); //Sleep for 1 sec
+
             }
             return true;
         }

@@ -373,13 +373,16 @@ namespace CSCN72030F21_AP_Classes
 
             while (repeat)
             {
+                int inputTime;
                 Console.WriteLine("Enter the total time (seconds) that you want to view the exterior temperature, or press q to return to previous menu:");
                 String userInput = Console.ReadLine();
-                int inputTime = Int32.Parse(userInput);
-
                 if (userInput == "q")
                     return false;
-                else if (inputTime < 1)
+                else
+                    inputTime = Int32.Parse(userInput);
+
+                
+                if (inputTime < 1)
                 {
                     Console.WriteLine("Invalid viewing time!");
                     continue;
