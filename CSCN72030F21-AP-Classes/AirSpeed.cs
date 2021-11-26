@@ -17,6 +17,16 @@ namespace CSCN72030F21_AP_Classes
             this.currentSpeed = 0;
         }
 
+        public int getSpeed()
+        {
+            return this.currentSpeed;
+        }
+
+        public void setSpeed(int speed)
+        {
+            this.currentSpeed = speed;
+        }
+
         public override bool display(int inputTime)
         {
             int lineCount = File.ReadAllLines(this.getFileName()).Count();
@@ -105,7 +115,7 @@ namespace CSCN72030F21_AP_Classes
             {
                 int newSpeed = speedStart + (interval * i);
 
-                newValues += Convert.ToString(newSpeed) + ',';
+                newValues += Convert.ToString(newSpeed) + '\n';
             }
 
             bool updateStatus = this.fileUpdate(newValues);
