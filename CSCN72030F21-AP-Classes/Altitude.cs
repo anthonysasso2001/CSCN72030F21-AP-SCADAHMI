@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,22 +10,22 @@ namespace CSCN72030F21_AP_Classes
 {
     public class Altitude : HardwareIO
     {
-        private double minHeightBound;
-        private double maxHeightBound;
+        private readonly double _minHeightBound;
+        private readonly double _maxHeightBound;
 
         public Altitude(string inputFileName) : base(inputFileName, true)
         {
-            this.minHeightBound = 23871.39;
-            this.maxHeightBound = 50931.759;
+            this._minHeightBound = 23871.39;
+            this._maxHeightBound = 50931.759;
         }
 
         private double getMinHeightBound()
         {
-            return this.minHeightBound;
+            return this._minHeightBound;
         }
         private double getMaxHeightBound()
         {
-            return this.maxHeightBound;
+            return this._maxHeightBound;
         }
 
         public override bool display(int inputTime)
@@ -48,7 +49,13 @@ namespace CSCN72030F21_AP_Classes
 
         public override bool modify(string inputValue)
         {
-            return true;
+            int fileLines = 15; //15 lines in the file
+            double startDouble = this.getAndFormatData(fileLines)[15];
+            double endDouble = Convert.ToDouble(inputValue);
+
+            bool updateState = this.updateDataFile(startDouble, endDouble, fileLines);
+
+            return updateState;
         }
 
         public class AltitudeTooLowException : System.Exception
@@ -112,28 +119,73 @@ namespace CSCN72030F21_AP_Classes
             }
         }
 
-        private bool updateDataFile(double currentHeight, double targetHeight)
+        private bool updateDataFile(double currentHeight, double targetHeight, int iterations)
         {
-            return true;
+            Random variation = new Random();
+
+            double[] outputArray = new double[iterations + 1];
+
+            double outputValue = currentHeight;
+            double incrementMultiplier = 0;
+            if (currentHeight != targetHeight)
+            {
+                incrementMultiplier = (targetHeight - currentHeight) / iterations;      //evaluates to value increments wil step by (slowly increase to the other number)
+            }
+            else if (currentHeight == targetHeight)
+            {
+                incrementMultiplier = -1;   //code to use the random sequence instead of slow increase and decrease
+            }
+            else
+            {
+                return false;
+            }
+
+            for (int i = 0; i <= iterations; i++)
+            {
+                if (-1 == incrementMultiplier)
+                {
+                    int minRange = -4000;
+                    int maxRange = 4000;
+                    double upperAmount = variation.Next(minRange, maxRange);
+                    double lowerAmount = ((double)variation.Next(0, 999)) / 1000;
+                    outputValue = targetHeight + upperAmount + lowerAmount;  //random number +- 4000 from input amount.
+                }
+                else
+                {
+                    outputValue = Math.Round(currentHeight + (incrementMultiplier * i), 2);
+                }
+                outputArray[i] = outputValue;
+                Console.WriteLine("position {0} = {1}", i, outputValue);
+            }
+            string formattedOutput = "";
+
+            for (int i = 0; i <= iterations; i++)
+            {
+                formattedOutput += outputArray[i].ToString() + " feet\n";
+            }
+
+            bool fileUpdateState = this.fileUpdate(formattedOutput);
+            return fileUpdateState;
         }
 
         private double[] getAndFormatData(int inputTime)
         {
             double[] outputDouble = new double[1 + inputTime];
             outputDouble[0] = inputTime;    //pos 0 is input time for consistency
-            double[] formattedValues = new double[2];
+            double formattedValues = 0;
             int lineNum = 1;
-            int iterationCount = 0;
+            int iterationCount = 1;
             Regex expectedOutput = new Regex("^([0-9]+.?[0-9]*|.[0-9]+) feet$");    //regex for [any amount of digits] [.] [any amount of digits] [feet]
             //([0-9]+.?[0-9]*|.[0-9]+) feet
-            while (iterationCount < inputTime)
+            while (iterationCount <= inputTime)
             {
                 string unformattedString = this.fileGet(lineNum);
                 if (expectedOutput.IsMatch(unformattedString))
                 {
                     lineNum++;
-                    formattedValues = (Array.ConvertAll(unformattedString.Split(' '), Double.Parse));
-                    outputDouble[iterationCount] = formattedValues[0];
+                    string[] splitValue = unformattedString.Split(' ');
+                    formattedValues = Convert.ToDouble(splitValue[0]);
+                    outputDouble[iterationCount] = formattedValues;
                     iterationCount++;
                 }
                 else if ("LINE_ERROR Sequence contains no elements".Equals(unformattedString))
@@ -154,7 +206,7 @@ namespace CSCN72030F21_AP_Classes
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write("WARNING ");
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.Write("plane at {0} feet !! {1} feet out of bounds\n\n", Math.Round(inputResponseValue, 2), heightWarningAmount);
+            Console.Write("plane at {0} feet !! {1} feet out of bounds\n\n", Math.Round(inputResponseValue, 2), Math.Round(heightWarningAmount,2));
         }
 
     }

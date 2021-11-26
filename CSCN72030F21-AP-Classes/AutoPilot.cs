@@ -552,7 +552,7 @@ namespace CSCN72030F21_AP_Classes
                     Console.Write(": ");
                     string userInput = Console.ReadLine();
                     int inputTime = Convert.ToInt32(userInput);
-                    AltitudeState = this.showInfo(this.planeCPAO, inputTime);
+                    AltitudeState = this.showInfo(this.planeAltitude, inputTime);
                 }
                 else if ("m" == loopOption)
                 {

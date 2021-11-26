@@ -9,35 +9,35 @@ namespace CSCN72030F21_AP_Classes
 {
     public class CabinPressureAndOxygen : HardwareIO
     {
-        private double minPressureBound;
-        private double maxPressureBound;
-        private int minOLevelBound;
-        private int maxOLevelBound;
+        private readonly double _minPressureBound;
+        private readonly double _maxPressureBound;
+        private readonly int _minOLevelBound;
+        private readonly int _maxOLevelBound;
 
         public CabinPressureAndOxygen(string inputFileName) : base(inputFileName, false)
         {
-            this.minPressureBound = 5;  //5psi danger, 9psi warning, 11-12 psi normal, 14 psi warning, 17 psi danger
-            this.maxPressureBound = 17;
-            this.minOLevelBound = 16;   //<16% = danger, 16-19% warning, 19-23%  normal, 23-25% warning, >25% = danger
-            this.maxOLevelBound = 25;
+            this._minPressureBound = 5;  //5psi danger, 9psi warning, 11-12 psi normal, 14 psi warning, 17 psi danger
+            this._maxPressureBound = 17;
+            this._minOLevelBound = 16;   //<16% = danger, 16-19% warning, 19-23%  normal, 23-25% warning, >25% = danger
+            this._maxOLevelBound = 25;
         }
 
         private double getMinPressureBound()
         {
-            return this.minPressureBound;
+            return this._minPressureBound;
         }
         private double getMaxPressureBound()
         {
-            return this.maxPressureBound;
+            return this._maxPressureBound;
         }
 
         private int getMinOxygenBound()
         {
-            return this.minOLevelBound;
+            return this._minOLevelBound;
         }
         private int getMaxOxygenBound()
         {
-            return this.maxOLevelBound;
+            return this._maxOLevelBound;
         }
 
         public override bool display(int inputTime)
@@ -140,7 +140,7 @@ namespace CSCN72030F21_AP_Classes
             {
                 outputDifferential = inputOxygen - (minWarningBound + 1);
             }
-            else if ((minOLevelBound < inputOxygen) && (maxWarningBound > inputOxygen)) //if oxygen levels are in normal bounds (20-23%)
+            else if ((this.getMinOxygenBound() < inputOxygen) && (maxWarningBound > inputOxygen)) //if oxygen levels are in normal bounds (20-23%)
             {
                 outputDifferential = 0;   //incase it passes through a valid O level...
             }
