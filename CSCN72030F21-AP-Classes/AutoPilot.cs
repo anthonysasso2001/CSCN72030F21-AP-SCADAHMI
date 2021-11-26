@@ -389,7 +389,7 @@ namespace CSCN72030F21_AP_Classes
                 }
                 else
                 {
-                    planeExtTemp.display(inputTime);
+                    this.showInfo(this.planeExtTemp, inputTime);
                     repeat = false;
                 }
             }
@@ -401,7 +401,7 @@ namespace CSCN72030F21_AP_Classes
 
             while (repeat)
             {
-                Console.WriteLine("Enter the total time (seconds) that you want to view the exterior temperature, or press q to return to previous menu:");
+                Console.WriteLine("Enter the total time (seconds) that you want to view the liquid level, or press q to return to previous menu:");
                 String userInput = Console.ReadLine();
                 int inputTime = Int32.Parse(userInput);
 
@@ -414,7 +414,7 @@ namespace CSCN72030F21_AP_Classes
                 }
                 else
                 {
-                    planeExtTemp.display(inputTime);
+                    this.showInfo(this.planeLiquidLevel, inputTime);
                     repeat = false;
                 }
             }
@@ -572,10 +572,46 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool CabinTempControlOption()
         {
-            Console.WriteLine("Enter a temperature (Celsius) that you want to set for the cabin (Between 16 and 30 degrees is recommended):");
-            string inputValue =  Console.ReadLine();
-            planeIntTemp.modify(inputValue);
+            Console.WriteLine("Select one of the option below:");
+            Console.WriteLine("1. View temperature");
+            Console.WriteLine("2. Modify temperature");
+            Console.WriteLine("3. Return to previous menu");
+            string inputOption = Console.ReadLine();
+            int inputTime;
+            bool repeat = true;
 
+            if (inputOption == "1")
+            {
+                while (repeat)
+                {
+                    Console.WriteLine("Enter the total time(seconds) that you want to view the liquid level:");
+                    inputTime = Int32.Parse(Console.ReadLine());
+                    if (inputTime < 1)
+                    {
+                        Console.WriteLine("Invalid time");
+                    }
+                    else
+                    {
+                        this. showInfo(this.planeIntTemp,inputTime);
+                        repeat = false;
+                    }
+                }
+            }
+            else if (inputOption == "2")
+            {
+                Console.WriteLine("Enter a temperature (Celsius) that you want to set for the cabin (Between 16 and 30 degrees is recommended):");
+                string inputValue = Console.ReadLine();
+                this.changeInfo(this.planeIntTemp, inputValue);
+            }
+            else if (inputOption == "3")
+            {
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
+                return false;
+            }
             return true;
         }
         private bool AltitudeControlOption()

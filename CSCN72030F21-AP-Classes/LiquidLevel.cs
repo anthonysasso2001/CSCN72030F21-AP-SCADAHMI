@@ -19,27 +19,30 @@ namespace CSCN72030F21_AP_Classes
         public override bool display(int inputTime)
         {
             int lineTotal = File.ReadAllLines(this.getFileName()).Count();
-            int countLine = 1;
-
-            for (int i = 1; i <= inputTime; i++)
+            int currentLine = 1;
+            int termination = 1;
+            int i = 1;
+            while (termination <= inputTime)
             {
-                if (fileGet(i - 1) == null) //check if the line is empty
-                    break;
 
-                int currentLiquidLevel = Int32.Parse(fileGet(i - 1));
-
-                if (!liquidIsLow(currentLiquidLevel))
+                if (this.fileGet(currentLine) == "LINE_ERROR Sequence contains no elements") //if the line is empty and the input time is longer, loop back
                 {
-                    this.warningMessage(currentLiquidLevel);
+                    currentLine = 1;
+                    continue;
+                }
+                int currentLevel = Int32.Parse(fileGet(currentLine));
+
+                if (!liquidIsLow(currentLevel))
+                {
+                    this.warningMessage(currentLevel);
                     Thread.Sleep(3000); //Sleep for 3 sec
                 }
-                Console.Write("The current liquid level is: " + currentLiquidLevel + "%");
-                countLine++;
-
-                if (countLine == lineTotal)     //Stop if reached the last line
-                    break;
+                Console.WriteLine("The current liquid level is:" + currentLevel + "%");
+                currentLine++;
+                termination++;
 
                 Thread.Sleep(1000); //Sleep for 1 sec
+
             }
             return true;
         }

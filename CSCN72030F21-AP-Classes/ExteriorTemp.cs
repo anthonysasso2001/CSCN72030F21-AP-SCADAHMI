@@ -19,7 +19,6 @@ namespace CSCN72030F21_AP_Classes
             int lineTotal = File.ReadAllLines(this.getFileName()).Count();
             int currentLine = 1;
             int termination = 1;
-            bool repeat=true;
             int i = 1;
             while (termination <= inputTime)
             {
