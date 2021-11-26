@@ -361,7 +361,13 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool CabinPressureAndOxygenSensorOption()
         {
-            return true;
+            Console.WriteLine("Cabin Pressure & Oxygen Menu");
+            Console.WriteLine("Select how long to review the sensor");
+            Console.Write(": ");
+            string userInput = Console.ReadLine();
+            int inputTime = Convert.ToInt32(userInput);
+            bool CPAOState = this.showInfo(this.planeCPAO, inputTime);
+            return CPAOState;
         }
         private bool TravelInfoSensorOption()
         {
@@ -531,7 +537,49 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool AltitudeControlOption()
         {
-            return true;
+            Console.WriteLine("Altitude Menu");
+
+            bool continueLoop = true;
+            bool AltitudeState = true;
+            while (continueLoop)
+            {
+                Console.Write("Would you like to display / modify the data?\n[d/m]: ");
+                string loopOption = Console.ReadLine();
+                if ("d" == loopOption)
+                {
+                    continueLoop = false;
+                    Console.WriteLine("Select how long to review the sensor");
+                    Console.Write(": ");
+                    string userInput = Console.ReadLine();
+                    int inputTime = Convert.ToInt32(userInput);
+                    AltitudeState = this.showInfo(this.planeAltitude, inputTime);
+                }
+                else if ("m" == loopOption)
+                {
+                    continueLoop = false;
+                    bool modifyLoop = true;
+                    while (modifyLoop)
+                    {
+                        Console.WriteLine("Select the new altitude for the plane");
+                        Console.Write("[28871.39 - 45931.759]: ");
+                        string userInput = Console.ReadLine();
+                        if (double.TryParse(userInput, out double d) && !Double.IsNaN(d) && !Double.IsInfinity(d))
+                        {
+                            modifyLoop = false;
+                            AltitudeState = this.changeInfo(this.planeAltitude, userInput);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Unknown Input Please Try Again (inputs are distances between 28871.39 - 45931.759\n");
+                        }
+                    }                    
+                }
+                else
+                {
+                    Console.WriteLine("Unknown Input Please Try Again (inputs are 'd' for display or 'm' for modify\n");
+                }
+            }
+            return AltitudeState;
         }
         private bool HeadingControlOption()
         {
