@@ -365,9 +365,12 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool TravelInfoSensorOption()
         {
-            int inputTime = 6;
+            int inputTime = 0;
+            Console.WriteLine("Please input the amount of seconds you would like to view the data for Travel Information:");
+            inputTime = int.Parse(Console.ReadLine());
+
             planeTravelInfo.display(inputTime);
-            return true;
+            return true; 
         }
         private bool ExteriorTempSensorOption()
         {
