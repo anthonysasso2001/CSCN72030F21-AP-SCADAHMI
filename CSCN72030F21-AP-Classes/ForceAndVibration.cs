@@ -48,6 +48,8 @@ namespace CSCN72030F21_AP_Classes
 
             int count = 0;
 
+            int countFactor = 1;
+
             for (int i = 1; i < inputTime + 1; i++)
             {
                 //Console.Clear();
@@ -178,9 +180,12 @@ namespace CSCN72030F21_AP_Classes
 
                 System.Threading.Thread.Sleep(1000);
                 count++;
+
+                int newCount = lineCount * countFactor;
                 if (count == lineCount)
                 {
                     i = 0;
+                    countFactor++;
                 }
                 if (count == inputTime)
                 {

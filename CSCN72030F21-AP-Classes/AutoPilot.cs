@@ -357,6 +357,33 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool ForceAndVibrationSensorOption()
         {
+            bool keepGoing = true;
+            while (keepGoing)
+            {
+               
+                int value = 0;
+
+                Console.WriteLine("Please enter the amount of time you would like to monitor the Force and Vibration Readings or q to go back: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out value) && value > 0)
+                {
+                    bool FAVState = this.showInfo(this.planeFAV, value);
+                    return FAVState;
+                    
+                }
+                else if (input == "q")
+                {
+                    
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("The input was not in the correct format.");
+
+                }
+            }
+
             return true;
         }
         private bool CabinPressureAndOxygenSensorOption()
@@ -523,6 +550,78 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool AirSpeedControlOption()
         {
+            bool keepGoing = true;
+            while (keepGoing)
+            {
+                int value = 0;
+
+                Console.WriteLine("Please enter 1 to display the speed OR press 2 to modify the speed OR press q to go back: ");
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out value) && value == 1)
+                {
+                    bool keepgoing = true;
+                    while (keepgoing)
+                    {
+                        Console.WriteLine("Please enter the amount of time you would like to monitor the AirSpeed Readings OR q to go back: ");
+                        string displayInput = Console.ReadLine();
+
+                        if (int.TryParse(displayInput, out value) && value > 0)
+                        {
+                            bool speedState = this.showInfo(this.planeSpeed, value);
+                            return speedState;
+                        }
+                        else if (displayInput == "q")
+                        {
+                            keepgoing = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The input was not in the correct format.");
+                        }
+                    }
+                    continue;
+
+                }
+                else if (int.TryParse(input, out value) && value == 2)
+                {
+                    bool keepgoing = true;
+                    while (keepgoing)
+                    {
+                        Console.WriteLine("Please enter the AirSpeed you would like to change to OR q to go back: ");
+                        string displayInput = Console.ReadLine();
+
+                        if (int.TryParse(displayInput, out value) && value > 0 && value < 1200)
+                        {
+                            string something = Convert.ToString(value);
+                            bool speedState = this.changeInfo(this.planeSpeed, something);
+                            if (speedState)
+                            {
+                                Console.WriteLine("Speed was succesfully changed.");
+                            }
+                            return speedState;
+                        }
+                        else if (displayInput == "q")
+                        {
+                            keepgoing = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("The input was not in the correct format.");
+                        }
+                    }
+                }
+                else if (input == "q")
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("The input was not in the correct format.");
+                }
+
+
+            }
+
             return true;
         }
         private bool CabinTempControlOption()
