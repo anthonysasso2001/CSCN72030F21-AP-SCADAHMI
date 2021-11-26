@@ -1,36 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace CSCN72030F21_AP_Classes
 {
     public class ExteriorTemp : HardwareIO
     {
+        private double maxTemp;
+        private double minTemp;
         public ExteriorTemp(string inputFileName) : base(inputFileName, false)
         {
-            
+            maxTemp = 50;
+            minTemp = 40; 
         }
          
+        private double getMinTemp()
+        {
+            return this.minTemp;
+        }
+        private double getMaxTemp()
+        {
+            return this.maxTemp;
+        }
         public override bool display(int inputTime)
         {
-            int extTemp = Int32.Parse(fileGet(0));
-            Console.Write("The current exterior temperature is:");
-            if(extTemp < (-40))
+            int lineTotal = File.ReadAllLines(this.getFileName()).Count();
+            int countLine = 1;
+
+            for (int i = 1; i <= inputTime; i++)
             {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.Write(fileGet(0) + "\n");
-            }
-            else if(extTemp >50)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write(fileGet(0) + "\n");
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.Write(fileGet(0) + "\n");
+                if (fileGet(i - 1) == null) //check if the line is empty
+                    break;
+
+                double currentTemp = Double.Parse(fileGet(i-1));
+                
+                if (!checkTempBounds(currentTemp))
+                {
+                    this.warningMessage(currentTemp);
+                    Thread.Sleep(3000); //Sleep for 3 sec
+                }
+                Console.Write("The current exterior temperature is:");
+                countLine++;
+                
+                if (countLine == lineTotal)     //Stop if reached the last line
+                    break;
+
+                Thread.Sleep(1000); //Sleep for 1 sec
             }
             return true;
         }
@@ -38,5 +54,26 @@ namespace CSCN72030F21_AP_Classes
         {
             return true;
         }
+        private bool checkTempBounds(double currentTemp)
+        {
+            if (currentTemp <= minTemp) //if temp is lower than -40 degree
+                return false;
+            else if (currentTemp >= maxTemp)    //if temp is higher than 50 degree
+                return false;
+            else
+                return true;
+        }
+
+        private void warningMessage(double currentTemp)
+        {
+            if (checkTempBounds(currentTemp))
+            { 
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("WARNING!!\nExterior temperature is extreme!");          
+            }
+         
+
+        }
+
     }
 }

@@ -369,6 +369,27 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool ExteriorTempSensorOption()
         {
+            bool repeat = true;
+
+            while (repeat)
+            {
+                Console.WriteLine("Enter the total time (seconds) that you want to view the exterior temperature, or press q to return to previous menu:");
+                String userInput = Console.ReadLine();
+                int inputTime = Int32.Parse(userInput);
+
+                if (userInput == "q")
+                    return false;
+                else if (inputTime < 1)
+                {
+                    Console.WriteLine("Invalid viewing time!");
+                    continue;
+                }
+                else
+                {
+                    planeExtTemp.display(inputTime);
+                    repeat = false;
+                }
+            }
             return true;
         }
         private bool LiquidLevelSensorOption()
