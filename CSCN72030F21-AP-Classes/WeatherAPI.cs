@@ -45,6 +45,54 @@ namespace CSCN72030F21_AP_Classes {
 
                 if (rainStatus == 0 && humidityStatus == 0 && UVStatus == 0) {
                     //Successful print
+                    //Rain
+                    switch (currentWeather[0]) {
+                        default:
+                            //Normal levels
+                            Console.Write("The Chance of Rain is: ");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("{0}", currentWeather[0]);
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                    }
+                    
+                    //Humidity
+                    switch (currentWeather[1]) {
+                        case > 80:
+                            //Above optimal
+                            Console.Write("The Humidity Percentage is: ");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("{0}", currentWeather[1]);
+                            Console.WriteLine("\tThe Humidity is above the optimal range.");
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                        default:
+                            //Normal levels
+                            Console.Write("The Humidity Percentage is: ");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("{0}", currentWeather[1]);
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                    }
+
+                    //UV
+                    switch (currentWeather[2]) {
+                        case > 10:
+                            //Above optimal
+                            Console.Write("The UV Index is: ");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("{0}", currentWeather[2]);
+                            Console.WriteLine("\tThe UV Index is above the optimal range.");
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                        default:
+                            //Normal levels
+                            Console.Write("The UV Index is: ");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("{0}", currentWeather[2]);
+                            Console.ForegroundColor = ConsoleColor.Gray;
+                            break;
+                    }
 
                 } else {
                     if (rainStatus != 0) {
@@ -81,8 +129,10 @@ namespace CSCN72030F21_AP_Classes {
         private void rainWarning(int rainStatus) {
             if (rainStatus == 1) {
                 //above
+                Console.WriteLine("The Rain value is above the acceptable range.");
             } else if (rainStatus == -1) {
                 //below
+                Console.WriteLine("The Rain value is under the acceptable range.");
             }
 
         }
@@ -99,8 +149,10 @@ namespace CSCN72030F21_AP_Classes {
         private void humidityWarning(int humidityStatus) {
             if (humidityStatus == 1) {
                 //above
+                Console.WriteLine("The Humidity value is above the acceptable range.");
             } else if (humidityStatus == -1) {
                 //below
+                Console.WriteLine("The Humidity value is under the acceptable range.");
             }
 
         }
@@ -117,8 +169,10 @@ namespace CSCN72030F21_AP_Classes {
         private void UVWarning(int uvStatus) {
             if (uvStatus == 1) {
                 //above
+                Console.WriteLine("The UV value is above the acceptable range.");
             } else if (uvStatus == -1) {
                 //below
+                Console.WriteLine("The UV value is under the acceptable range.");
             }
 
         }

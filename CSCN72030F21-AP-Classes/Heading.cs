@@ -30,6 +30,10 @@ namespace CSCN72030F21_AP_Classes {
 
                 if (headingStatus == 0) {
                     //successful print
+                    Console.Write("The Heading is: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("{0}", currentHeading);
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 } else {
                     headingWarning(headingStatus);
                 }
