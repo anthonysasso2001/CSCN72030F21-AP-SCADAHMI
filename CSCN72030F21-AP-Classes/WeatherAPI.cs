@@ -26,8 +26,13 @@ namespace CSCN72030F21_AP_Classes {
 
         public override bool display(int inputTime) {
             
-            for(int i = 1; i < inputTime; i++) {
-
+            for(int i = 1; i <= inputTime; i++) {
+                //5 lines in the weatherAPI.txt
+                //Could improve this if() statement by making it modular
+                if (i > 5) {
+                    i = 1;
+                    inputTime = inputTime - 5;
+                }
                 string[] loadedData = loadData(i);
 
                 currentWeather[0] = Convert.ToDouble(loadedData[0]);

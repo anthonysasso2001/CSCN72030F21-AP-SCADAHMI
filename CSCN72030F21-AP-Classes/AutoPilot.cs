@@ -353,6 +353,24 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool WeatherAPISensorOption()
         {
+            //Borrowing menu format from Eazaz
+            bool trueLoop = true;
+            while (trueLoop) {
+                int secondsValue = 0;
+
+                Console.WriteLine("Please enter the amount of time you would like to monitor the WeatherAPI Readings or q to go back: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out secondsValue) && secondsValue > 0) {
+                    bool weatherState = this.showInfo(this.weather, secondsValue);
+                    return weatherState;
+                } else if (input == "q") {
+                    return false;
+                } else {
+                    Console.WriteLine("The input was not in the correct format.");
+                }
+            }
+
             return true;
         }
         private bool ForceAndVibrationSensorOption()
@@ -535,6 +553,83 @@ namespace CSCN72030F21_AP_Classes
         }
         private bool HeadingControlOption()
         {
+            //Borrowing menu format from Eazaz
+            
+            bool mainLoop = true;
+            while (mainLoop) {
+                int secondsValue = 0;
+                double inputHeading = 0;
+                int inputValue = 0;
+
+                Console.WriteLine("Please enter 1 to display the heading OR press 2 to modify the heading OR press q to go back: ");
+                string input = Console.ReadLine();
+
+                //Display menu
+                if (int.TryParse(input, out inputValue) && inputValue == 1) {
+                    bool displayLoop = true;
+                    while (displayLoop) {
+                        Console.WriteLine("Please enter the amount of time you would like to monitor the Heading Readings OR q to go back: ");
+                        string displayInput = Console.ReadLine();
+
+                        if (int.TryParse(displayInput, out secondsValue) && secondsValue > 0) {
+                            bool headingState = this.showInfo(this.planeHeading, secondsValue);
+                            return headingState;
+                        } else if (displayInput == "q") {
+                            displayLoop = false;
+                        } else {
+                            Console.WriteLine("The input was not in the correct format.");
+                        }
+                    }
+                    continue;
+
+
+                //Modify menu
+                } else if (int.TryParse(input, out inputValue) && inputValue == 2) {
+                    bool modLoop = true;
+                    while (modLoop) {
+                        Console.WriteLine("Please enter the Heading you would like to change to OR q to go back: ");
+                        string displayInput = Console.ReadLine();
+
+                        if (double.TryParse(displayInput, out inputHeading) && inputHeading > 0 && inputHeading < 360) {
+                            double headingStep4 = inputHeading - 4;
+                            headingStep4 = headingStep4 % 360;
+                            double headingStep3 = headingStep4 - 4;
+                            headingStep3 = headingStep3 % 360;
+                            double headingStep2 = headingStep3 - 4;
+                            headingStep2 = headingStep2 % 360;
+                            double headingStep1 = headingStep2 - 4;
+                            headingStep1 = headingStep1 % 360;
+
+                            string newFinalHeading = Convert.ToString(inputHeading);
+                            string newStep4Heading = Convert.ToString(headingStep4);
+                            string newStep3Heading = Convert.ToString(headingStep3);
+                            string newStep2Heading = Convert.ToString(headingStep2);
+                            string newStep1Heading = Convert.ToString(headingStep1);
+
+                            string newHeading = newStep1Heading + '\n' + newStep2Heading + '\n' + newStep3Heading + '\n' + newStep4Heading + '\n' + newFinalHeading;
+
+                            bool headingState = this.changeInfo(this.planeHeading, newHeading);
+                            if (headingState) {
+                                Console.WriteLine("Heading was succesfully changed.");
+                            }
+                            return headingState;
+                        } else if (displayInput == "q") {
+                            modLoop = false;
+                        } else {
+                            Console.WriteLine("The input was not in the correct range.");
+                        }
+                    }
+
+
+                } else if (input == "q") {
+                    return false;
+                } else {
+                    Console.WriteLine("The input was not in the correct format.");
+                }
+            }
+
+
+
             return true;
         }
 

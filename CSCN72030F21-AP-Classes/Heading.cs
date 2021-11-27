@@ -21,7 +21,13 @@ namespace CSCN72030F21_AP_Classes {
 
         public override bool display(int inputTime) {
             
-            for(int i = 1; i < inputTime; i++) {
+            for(int i = 1; i <= inputTime; i++) {
+                //5 lines in the weatherAPI.txt
+                //Could improve this if() statement by making it modular
+                if (i > 5) {
+                    i = 1;
+                    inputTime = inputTime - 5;
+                }
 
                 string loadedData = loadData(i);
 
@@ -57,8 +63,10 @@ namespace CSCN72030F21_AP_Classes {
         private void headingWarning(int headingStatus) {
             if (headingStatus == 1) {
                 //above
+                Console.WriteLine("The Heading value is above the acceptable range.");
             } else if (headingStatus == -1) {
                 //below
+                Console.WriteLine("The Heading value is below the acceptable range.");
             }
 
         }
