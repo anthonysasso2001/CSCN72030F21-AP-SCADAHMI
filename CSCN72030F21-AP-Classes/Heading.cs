@@ -23,7 +23,16 @@ namespace CSCN72030F21_AP_Classes {
             
             for(int i = 1; i < inputTime; i++) {
 
+                string loadedData = loadData(i);
 
+                currentHeading = Convert.ToDouble(loadedData);
+                int headingStatus = headingCheck(currentHeading);
+
+                if (headingStatus == 0) {
+                    //successful print
+                } else {
+                    headingWarning(headingStatus);
+                }
 
 
             }
@@ -32,9 +41,29 @@ namespace CSCN72030F21_AP_Classes {
             return true;
         }
 
+        private int headingCheck(double heading) {
+            if (heading > 360) {
+                return 1;
+            } else if (heading < 0) {
+                return -1;
+            }
+            return 0;
+        }
+
+        private void headingWarning(int headingStatus) {
+            if (headingStatus == 1) {
+                //above
+            } else if (headingStatus == -1) {
+                //below
+            }
+
+        }
+
         public override bool modify(string inputValue) {
-            
-            return true;
+
+            bool updateStatus = this.fileUpdate(inputValue);
+            return updateStatus;
+
         }
     }
 }

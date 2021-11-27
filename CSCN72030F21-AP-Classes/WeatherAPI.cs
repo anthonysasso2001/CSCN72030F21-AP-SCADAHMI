@@ -10,9 +10,6 @@ using System.IO;
 namespace CSCN72030F21_AP_Classes {
     public class WeatherAPI: HardwareIO {
         private double[] currentWeather;
-        private double currentChanceOfRain;
-        private double currentHumidity;
-        private int currentUVIndex;
         public WeatherAPI(string inputFileName): base(inputFileName, false) {
             /* [0]: Chance of rain
              * [1]: Humidity
@@ -48,6 +45,7 @@ namespace CSCN72030F21_AP_Classes {
 
                 if (rainStatus == 0 && humidityStatus == 0 && UVStatus == 0) {
                     //Successful print
+
                 } else {
                     if (rainStatus != 0) {
                         rainWarning(rainStatus);
