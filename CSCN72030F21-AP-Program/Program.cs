@@ -22,26 +22,112 @@ namespace CSCN72030F21_AP_Program
             fileArray[8] = (dataFile + "InteriorTempData.txt");
             fileArray[9] = (dataFile + "AltitudeData.txt");
             fileArray[10] = (dataFile + "HeadingData.txt");
+
+            //preset data for the files
             string[] startupData = {
-                "30,16,8\n40,24,4\n60,30,2\n80,40,0\n95,8,5",
-                "1\n",
-                "10.4,20\n14.83,18\n8.4,21\n12.9,21\n13,22\n11.8,24\n8.12,21\n16,21\n12,22\n0,5\n20,41",
-                "3000,3.33\n2500,2.78\n2000,2.22\n1500,1.67\n1000,1.11\n500,0.56\n250,0.27",
-                "34.0\n33.8\n33.8\n33.0\n32.7\n33.0",
-                "88\n87\n86\n85\n84",
-                "30\n29\n28\n27\n26\n25\n24\n23\n22\n21\n20",
-                "7\n",
-                "22\n21\n20\n19\n18\n17\n16\n15",
-                "26562.95 feet\n27525.42 feet\n28487.89 feet\n29450.36 feet\n30412.83 feet\n31375.3 feet\n32337.77 feet\n33300.24 feet\n34262.71 feet\n35225.18 feet\n36187.65 feet\n37150.12 feet\n38112.59 feet\n39075.06 feet\n40037.53 feet\n41000 feet",
-                "216.2\n222.2\n228.2\n234.2\n240.2"};
+                //WeatherAPI
+                "30,16,8\n" +
+                "40,24,4\n" +
+                "60,30,2\n" +
+                "80,40,0\n" +
+                "95,8,5\n",
+
+                //Force and Vibration
+                "",
+
+                //Cabin Pressure & Oxygen
+                "10.4,20\n" +
+                "14.83,18\n" +
+                "8.4,21\n" +
+                "12.9,21\n" +
+                "13,22\n" +
+                "11.8,24\n" +
+                "8.12,21\n" +
+                "16,21\n" +
+                "12,22\n" +
+                "0,5\n" +
+                "20,41\n",
+
+                //Travel Info
+                "3000,3.33\n" +
+                "2500,2.78\n" +
+                "2000,2.22\n" +
+                "1500,1.67\n" +
+                "1000,1.11\n" +
+                "500,0.56\n" +
+                "250,0.27\n",
+
+                //Exterior Temperature
+                "34.0\n" +
+                "33.8\n" +
+                "33.8\n" +
+                "33.0\n" +
+                "32.7\n" +
+                "33.0\n",
+
+                //Liquid Level
+                "88\n" +
+                "87\n" +
+                "86\n" +
+                "85\n" +
+                "84\n",
+
+                //Fuel Control
+                "30\n" +
+                "29\n" +
+                "28\n" +
+                "27\n" +
+                "26\n" +
+                "25\n" +
+                "24\n" +
+                "23\n" +
+                "22\n" +
+                "21\n" +
+                "20\n",
+
+                //Air Speed
+                "",
+
+                //Interior Temperature
+                "22\n" +
+                "21\n" +
+                "20\n" +
+                "19\n" +
+                "18\n" +
+                "17\n" +
+                "16\n" +
+                "15\n",
+
+                //Altitude
+                "26562.95 feet\n" +
+                "27525.42 feet\n" +
+                "28487.89 feet\n" +
+                "29450.36 feet\n" +
+                "30412.83 feet\n" +
+                "31375.3 feet\n" +
+                "32337.77 feet\n" +
+                "33300.24 feet\n" +
+                "34262.71 feet\n" +
+                "35225.18 feet\n" +
+                "36187.65 feet\n" +
+                "37150.12 feet\n" +
+                "38112.59 feet\n" +
+                "39075.06 feet\n" +
+                "40037.53 feet\n" +
+                "41000 feet\n",
+                
+                //Heading
+                "216.2\n" +
+                "222.2\n" +
+                "228.2\n" +
+                "234.2\n" +
+                "240.2\n"};
+
+            //checks if file exists and if it doesn't creates that file and populates with data
             for (int i = 0; i < 11; i++)
             {
                 if (!File.Exists(fileArray[i]))
                 {
-
-                    //File.Create(fileArray[i]);
-
-
                     File.WriteAllText(fileArray[i], startupData[i]);
                 }
             }
