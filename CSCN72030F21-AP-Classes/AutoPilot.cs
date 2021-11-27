@@ -103,7 +103,9 @@ namespace CSCN72030F21_AP_Classes
             bool menuLoop = true;
             while (menuLoop)
             {
-                bool returnFromSub = false;
+                //legacy from commented out continue loop, will deleted when / if it is removed...
+                //bool returnFromSub = false;
+
                 Console.WriteLine(
                     "Please select a Sub Menu:\n" +
                     "0. Exit Auto Pilot\n" +
@@ -141,28 +143,36 @@ namespace CSCN72030F21_AP_Classes
                         break;
                     case "1":
                         this.SensorMenu();
-                        returnFromSub = true;
+                        //legacy from commented out continue loop, will deleted when / if it is removed...
+                        //returnFromSub = true;
                         break;
 
                     case "2":
                         this.ControlMenu();
-                        returnFromSub = true;
+                        //legacy from commented out continue loop, will deleted when / if it is removed...
+                        //returnFromSub = true;
                         break;
 
                     case "3":
                         this.manualOverrides();
-                        returnFromSub = true;
+                        //legacy from commented out continue loop, will deleted when / if it is removed...
+                        //returnFromSub = true;
                         break;
 
                     case "4":
                         this.toggleAutoPilot();
-                        returnFromSub = true;
+                        //legacy from commented out continue loop, will deleted when / if it is removed...
+                        //returnFromSub = true;
                         break;
 
                     default:
                         Console.WriteLine("Error, Unknown Input\n Please try Again\n");
                         break;
                 }
+
+                /*
+                 * Keeping this in case we need the loop outline, but serves no functional purpose so commented out...
+                 * Will be likely deleted before v2 unless required / utilized
                 if (false == returnFromSub)
                 {
 
@@ -188,6 +198,7 @@ namespace CSCN72030F21_AP_Classes
                         }
                     }
                 }
+                */
             }
         }
 
@@ -200,7 +211,7 @@ namespace CSCN72030F21_AP_Classes
 
                 Console.WriteLine("Please select a sensor module to access (by number):\n");
 
-                Console.WriteLine("0. Exit Sensor Menu\n");
+                Console.WriteLine("0. Exit Sensor Menu & Return to Main Menu\n");
 
                 Console.Write("1. ");
                 colouredModuleState(boolToInt(this.weather.getActivity()));
@@ -236,7 +247,7 @@ namespace CSCN72030F21_AP_Classes
                         bool exitLoop = true;
                         while (exitLoop)
                         {
-                            Console.WriteLine("Are you sure you want to exit?\n[y/n]: ");
+                            Console.WriteLine("Are you sure you want to return to the main menu?\n[y/n]: ");
                             string loopOption = Console.ReadLine();
                             if ("y" == loopOption)
                             {
@@ -329,26 +340,27 @@ namespace CSCN72030F21_AP_Classes
                         break;
                 }
 
-                bool continueLoop = true;
-                while (continueLoop) {
-                    Console.WriteLine("Would you like to continue?\n[y/n]:");
-                    string loopOption = Console.ReadLine();
-                    if ("y" == loopOption)
-                    {
-                        continueLoop = false;
-                        sensorLoop = true;
-                    }
-                    else if ("n" == loopOption)
-                    {
-                        continueLoop = false;
-                        sensorLoop = false;
-                        return;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
-                    }
-                }
+                //May be removed for same reason as main menu, technically redundant...
+                //bool continueLoop = true;
+                //while (continueLoop) {
+                //    Console.WriteLine("Would you like to continue?\n[y/n]:");
+                //    string loopOption = Console.ReadLine();
+                //    if ("y" == loopOption)
+                //    {
+                //        continueLoop = false;
+                //        sensorLoop = true;
+                //    }
+                //    else if ("n" == loopOption)
+                //    {
+                //        continueLoop = false;
+                //        sensorLoop = false;
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                //    }
+                //}
             }
         }
         private bool WeatherAPISensorOption()
@@ -502,7 +514,7 @@ namespace CSCN72030F21_AP_Classes
             {
                 Console.WriteLine("Please select a control module to access (by number):\n");
 
-                Console.WriteLine("0. Exit Control Menu\n");
+                Console.WriteLine("0. Exit Control Menu & Return to Main Menu\n");
 
                 Console.Write("1. ");
                 colouredModuleState(boolToInt(this.planeFuelControl.getActivity()));
@@ -535,7 +547,7 @@ namespace CSCN72030F21_AP_Classes
                         bool exitLoop = true;
                         while (exitLoop)
                         {
-                            Console.WriteLine("Are you sure you want to exit?\n[y/n]: ");
+                            Console.WriteLine("Are you sure you want to return to the main menu?\n[y/n]: ");
                             string loopOption = Console.ReadLine();
                             if ("y" == loopOption)
                             {
@@ -612,27 +624,29 @@ namespace CSCN72030F21_AP_Classes
                         Console.WriteLine("Error, Unknown Input\n Please try Again\n");
                         break;
                 }
-                bool continueLoop = true;
-                while (continueLoop)
-                {
-                    Console.WriteLine("Would you like to continue?\n[y/n]:");
-                    string loopOption = Console.ReadLine();
-                    if ("y" == loopOption)
-                    {
-                        continueLoop = false;
-                        controlLoop = true;
-                    }
-                    else if ("n" == loopOption)
-                    {
-                        continueLoop = false;
-                        controlLoop = false;
-                        return;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
-                    }
-                }
+
+                //May be removed for same reason as main menu, technically redundant...
+                //bool continueLoop = true;
+                //while (continueLoop)
+                //{
+                //    Console.WriteLine("Would you like to continue?\n[y/n]:");
+                //    string loopOption = Console.ReadLine();
+                //    if ("y" == loopOption)
+                //    {
+                //        continueLoop = false;
+                //        controlLoop = true;
+                //    }
+                //    else if ("n" == loopOption)
+                //    {
+                //        continueLoop = false;
+                //        controlLoop = false;
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                //    }
+                //}
             }
         }
         private bool FuelControlControlOption()
@@ -974,7 +988,7 @@ namespace CSCN72030F21_AP_Classes
                 //menu options for toggles
                 Console.WriteLine("Please select a module to override (by number):\n");
 
-                Console.WriteLine("0. Exit Manual Override Menu\n");
+                Console.WriteLine("0. Exit Manual Overrides & Return to Main Menu\n");
 
                 Console.Write("1. ");
                 colouredModuleState(boolToInt(this.weather.getActivity()));
@@ -1031,7 +1045,7 @@ namespace CSCN72030F21_AP_Classes
                         bool exitLoop = true;
                         while (exitLoop)
                         {
-                            Console.WriteLine("Are you sure you want to exit?\n[y/n]: ");
+                            Console.WriteLine("Are you sure you want to return to the main menu?\n[y/n]: ");
                             string loopOption = Console.ReadLine();
                             if ("y" == loopOption)
                             {
@@ -1131,27 +1145,29 @@ namespace CSCN72030F21_AP_Classes
                         Console.WriteLine("Error, Unknown Input\n Please try Again\n");
                         break;
                 }
-                bool continueLoop = true;
-                while (continueLoop)
-                {
-                    Console.WriteLine("Would you like to continue?\n[y/n]:");
-                    string loopOption = Console.ReadLine();
-                    if ("y" == loopOption)
-                    {
-                        continueLoop = false;
-                        overrideLoop = true;
-                    }
-                    else if ("n" == loopOption)
-                    {
-                        continueLoop = false;
-                        overrideLoop = false;
-                        return true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
-                    }
-                }
+
+                //May be removed for same reason as main menu, technically redundant...
+                //bool continueLoop = true;
+                //while (continueLoop)
+                //{
+                //    Console.WriteLine("Would you like to continue?\n[y/n]:");
+                //    string loopOption = Console.ReadLine();
+                //    if ("y" == loopOption)
+                //    {
+                //        continueLoop = false;
+                //        overrideLoop = true;
+                //    }
+                //    else if ("n" == loopOption)
+                //    {
+                //        continueLoop = false;
+                //        overrideLoop = false;
+                //        return true;
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                //    }
+                //}
             }
 
             //unsure what false case to pass, should return false if they miss the exit option and it reaches this point??
@@ -1177,7 +1193,7 @@ namespace CSCN72030F21_AP_Classes
             while (toggleLoop)
             {
                 int falseCount = 0;
-                for(int i = 0; i < moduleArray.Length; i++)
+                for (int i = 0; i < moduleArray.Length; i++)
                 {
                     if (!moduleArray[i].getActivity())
                     {
@@ -1197,47 +1213,85 @@ namespace CSCN72030F21_AP_Classes
                     this.autoPilotState = 2;
                 }
 
-                Console.WriteLine("AutoPilot state = ");
+                Console.Write("AutoPilot state = ");
                 colouredModuleState(this.autoPilotState);
-                Console.WriteLine("\nToggle Auto Pilot to true or false? [t/f]:");
+
+                Console.WriteLine(
+                    "\nPlease Select How to Toggle the Autopilot (or 0 to exit):\n" +
+                    "0. Exit Toggle AutoPilot & Return to Main Menu\n" +
+                    "1. Set AutoPilot to all active\n" +
+                    "2. Set AutoPilot to all inactive / manual\n");
+                Console.Write(":");
                 string inputOption = Console.ReadLine();
 
-                if ("t" == inputOption)
+                //switch case for menu
+                switch (inputOption)
                 {
-                    this.autoPilotState = 1;
-                    toggleLoop = false;
+                    case "0":
+                        bool exitLoop = true;
+                        while (exitLoop)
+                        {
+                            Console.WriteLine("Are you sure you want to return to the main menu?\n[y/n]: ");
+                            string loopOption = Console.ReadLine();
+                            if ("y" == loopOption)
+                            {
+                                exitLoop = false;
+                                return true;
+                            }
+                            else if ("n" == loopOption)
+                            {
+                                //do nothing...
+                                exitLoop = false;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unknown Input Please Try Again (inputs are 'y' for yes or 'n' for no\n");
+                            }
+                        }
+                        break;
+
+                    case "1":
+                        this.autoPilotState = 1;
+
+                        Console.WriteLine("AutoPilot toggled to ");
+                        colouredModuleState(this.autoPilotState);
+                        Console.WriteLine("\n");
+                        break;
+
+                    case "2":
+                        this.autoPilotState = 0;
+
+                        Console.WriteLine("AutoPilot toggled to ");
+                        colouredModuleState(this.autoPilotState);
+                        Console.WriteLine("\n");
+                        break;
+
+                    default:
+                        Console.WriteLine("Error, Unknown Input\n Please try Again\n");
+                        break;
                 }
-                else if ("f" == inputOption)
+
+                //check if module = true and set to off
+                for (int i = 0; i < moduleArray.Length; i++)
                 {
-                    this.autoPilotState = 0;
-                    //do nothing since they do not want to change it
-                    toggleLoop = false;
+                    if (this.autoPilotState != boolToInt(moduleArray[i].getActivity()))
+                    {
+                        moduleArray[i].toggleActive();
+                    }
                 }
-                else
+
+                //check that they were set correctly
+                for (int i = 0; i < moduleArray.Length; i++)
                 {
-                    Console.WriteLine("Unknown Input Please Try Again (inputs are 't' for true or 'f' for false\n");
+                    if (this.autoPilotState != boolToInt(moduleArray[i].getActivity()))
+                    {
+                        return false;
+                    }
                 }
             }
 
-            //check if module = true and set to off
-            for (int i = 0; i < moduleArray.Length; i++)
-            {
-                if (this.autoPilotState != boolToInt(moduleArray[i].getActivity()))
-                {
-                    moduleArray[i].toggleActive();
-                }
-            }
-
-            //check that they were set correctly
-            for (int i = 0; i < moduleArray.Length; i++)
-            {
-                if (this.autoPilotState != boolToInt(moduleArray[i].getActivity()))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            //only let them exit through inputing 0 otherwise it shouldn't exit here...
+            return false;
         }
     }
 }
