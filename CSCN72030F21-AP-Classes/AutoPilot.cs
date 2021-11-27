@@ -591,13 +591,13 @@ namespace CSCN72030F21_AP_Classes
                         string displayInput = Console.ReadLine();
 
                         if (double.TryParse(displayInput, out inputHeading) && inputHeading > 0 && inputHeading < 360) {
-                            double headingStep4 = inputHeading - 4;
+                            double headingStep4 = inputHeading + 4;
                             headingStep4 = headingStep4 % 360;
-                            double headingStep3 = headingStep4 - 4;
+                            double headingStep3 = headingStep4 + 4;
                             headingStep3 = headingStep3 % 360;
-                            double headingStep2 = headingStep3 - 4;
+                            double headingStep2 = headingStep3 + 4;
                             headingStep2 = headingStep2 % 360;
-                            double headingStep1 = headingStep2 - 4;
+                            double headingStep1 = headingStep2 + 4;
                             headingStep1 = headingStep1 % 360;
 
                             string newFinalHeading = Convert.ToString(inputHeading);
