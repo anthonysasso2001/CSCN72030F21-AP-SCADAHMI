@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CSCN72030F21_AP_Classes;
 
 namespace CSCN72030F21_AP_Tests
 {
@@ -6,9 +7,10 @@ namespace CSCN72030F21_AP_Tests
     public class AltitudeTests
     {
         [TestMethod]
-        public void ALT_UNIT_001_input_output_expected()
+        public void AUT_ALT_001()
         {
-
+            Altitude testAltitude = new("..\\TestData\\testAltitudeConstructor.txt");
+            Assert.IsNotNull(testAltitude);
         }
     }
 }

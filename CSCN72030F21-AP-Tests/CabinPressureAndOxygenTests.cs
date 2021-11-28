@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CSCN72030F21_AP_Classes;
 
 namespace CSCN72030F21_AP_Tests
 {
@@ -6,9 +7,11 @@ namespace CSCN72030F21_AP_Tests
     public class CabinPressureAndOxygenTests
     {
         [TestMethod]
-        public void PAO_UNIT_001_input_output_expected()
+        public void AUT_PAO_001()
         {
-
+            CabinPressureAndOxygen testCPAO = new("..\\TestData\\testCPAOConstructor.txt");
+            Assert.IsNotNull(testCPAO);
         }
+
     }
 }

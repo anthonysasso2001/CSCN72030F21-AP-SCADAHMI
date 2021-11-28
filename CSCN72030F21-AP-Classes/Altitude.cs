@@ -52,10 +52,10 @@ namespace CSCN72030F21_AP_Classes
         public override bool modify(string inputValue)
         {
             int fileLines = 15; //15 lines in the file
-            double startDouble = this.getAndFormatData(fileLines)[15];
+            double[] startDouble = this.getAndFormatData(fileLines+1);
             double endDouble = Convert.ToDouble(inputValue);
 
-            bool updateState = this.updateDataFile(startDouble, endDouble, fileLines);
+            bool updateState = this.updateDataFile(startDouble[fileLines+1], endDouble, fileLines);
 
             return updateState;
         }
@@ -125,7 +125,7 @@ namespace CSCN72030F21_AP_Classes
         {
             Random variation = new Random();
 
-            double[] outputArray = new double[iterations + 1];
+            double[] outputArray = new double[(iterations + 2)];
 
             double outputValue = currentHeight;
             double incrementMultiplier = 0;
@@ -135,7 +135,7 @@ namespace CSCN72030F21_AP_Classes
             }
             else if (currentHeight == targetHeight)
             {
-                incrementMultiplier = -1;   //code to use the random sequence instead of slow increase and decrease
+                incrementMultiplier = 0;   //code to use the random sequence instead of slow increase and decrease
             }
             else
             {
@@ -144,7 +144,7 @@ namespace CSCN72030F21_AP_Classes
 
             for (int i = 0; i <= iterations; i++)
             {
-                if (-1 == incrementMultiplier)
+                if (0 == incrementMultiplier)
                 {
                     int minRange = -4000;
                     int maxRange = 4000;
@@ -157,7 +157,7 @@ namespace CSCN72030F21_AP_Classes
                     outputValue = Math.Round(currentHeight + (incrementMultiplier * i), 2);
                 }
                 outputArray[i] = outputValue;
-                //Console.WriteLine("position {0} = {1}", i, outputValue);
+                Console.WriteLine("position {0} = {1}", i, outputValue);
             }
             string formattedOutput = "";
 
