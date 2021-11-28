@@ -8,7 +8,7 @@ namespace CSCN72030F21_AP_Program
     {
         static void Main(string[] args)
         {
-            const string dataFile = "\\Data\\";   //"macro for file path
+            const string dataFile = "..\\Data\\";   //"macro for file path
 
             string[] fileArray = new string[11];
             fileArray[0] = (dataFile + "WeatherAPIData.txt");

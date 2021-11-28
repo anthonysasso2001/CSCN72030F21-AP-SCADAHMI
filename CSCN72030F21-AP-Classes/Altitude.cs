@@ -157,7 +157,7 @@ namespace CSCN72030F21_AP_Classes
                     outputValue = Math.Round(currentHeight + (incrementMultiplier * i), 2);
                 }
                 outputArray[i] = outputValue;
-                Console.WriteLine("position {0} = {1}", i, outputValue);
+                //Console.WriteLine("position {0} = {1}", i, outputValue);
             }
             string formattedOutput = "";
 

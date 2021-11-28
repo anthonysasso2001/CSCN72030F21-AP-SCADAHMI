@@ -458,13 +458,13 @@ namespace CSCN72030F21_AP_Classes
 
             while (repeat)
             {
-                int inputTime;
+                int inputTime = 0;
                 Console.WriteLine("Enter the total time (seconds) that you want to view the exterior temperature, or press q to return to previous menu:");
                 String userInput = Console.ReadLine();
                 if (userInput == "q")
                     return false;
                 else
-                    inputTime = Int32.Parse(userInput);
+                    Int32.TryParse(userInput, out inputTime);
 
                 
                 if (inputTime < 1)
@@ -488,7 +488,8 @@ namespace CSCN72030F21_AP_Classes
             {
                 Console.WriteLine("Enter the total time (seconds) that you want to view the liquid level, or press q to return to previous menu:");
                 String userInput = Console.ReadLine();
-                int inputTime = Int32.Parse(userInput);
+                int inputTime = 0;
+                Int32.TryParse(userInput,out inputTime);
 
                 if (userInput == "q")
                     return false;
