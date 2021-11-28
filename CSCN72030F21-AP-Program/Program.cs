@@ -33,7 +33,11 @@ namespace CSCN72030F21_AP_Program
                 "95,8,5\n",
 
                 //Force and Vibration
-                "",
+                "7,8\n" +
+                "7,8\n" +
+                "8,8\n" +
+                "8,7\n" +
+                "10,7\n",
 
                 //Cabin Pressure & Oxygen
                 "10.4,20\n" +
@@ -86,7 +90,16 @@ namespace CSCN72030F21_AP_Program
                 "20\n",
 
                 //Air Speed
-                "",
+                "300\n" +
+                "350\n" +
+                "400\n" +
+                "450\n" +
+                "500\n" +
+                "550\n" +
+                "600\n" +
+                "650\n" +
+                "700\n" +
+                "750\n",
 
                 //Interior Temperature
                 "22\n" +
