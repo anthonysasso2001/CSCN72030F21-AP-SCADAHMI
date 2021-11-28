@@ -44,7 +44,7 @@ namespace CSCN72030F21_AP_Classes {
                     headingWarning(headingStatus);
                 }
 
-
+                System.Threading.Thread.Sleep(1000);
             }
 
 

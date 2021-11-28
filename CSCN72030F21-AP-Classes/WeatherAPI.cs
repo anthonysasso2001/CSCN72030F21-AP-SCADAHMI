@@ -112,7 +112,7 @@ namespace CSCN72030F21_AP_Classes {
                         UVWarning(UVStatus);
                     }
                 }
-
+                System.Threading.Thread.Sleep(1000);
             }
 
             return true;
