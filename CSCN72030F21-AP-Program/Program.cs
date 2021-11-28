@@ -137,6 +137,10 @@ namespace CSCN72030F21_AP_Program
                 "240.2\n"};
 
             //checks if file exists and if it doesn't creates that file and populates with data
+            if (!Directory.Exists(dataFile))
+            {
+                Directory.CreateDirectory(dataFile);
+            }
             for (int i = 0; i < 11; i++)
             {
                 if (!File.Exists(fileArray[i]))
