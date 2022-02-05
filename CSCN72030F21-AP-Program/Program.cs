@@ -1,4 +1,12 @@
-﻿using System;
+﻿//Project III - Software Development
+//Conestoga College
+//Sep. 2021 - Dec. 2021
+//Contributers:
+//              Thi Huong Tra Le (Rachel)
+//              Anthony Sasso
+//              Navdeep Mangat
+//              Eazaz Jakda
+using System;
 using System.IO;
 using CSCN72030F21_AP_Classes;
 

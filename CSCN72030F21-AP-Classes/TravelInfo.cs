@@ -1,4 +1,12 @@
-﻿using System;
+﻿//Project III - Software Development
+//Conestoga College
+//Sep. 2021 - Dec. 2021
+//Contributers:
+//              Thi Huong Tra Le (Rachel)
+//              Anthony Sasso
+//              Navdeep Mangat
+//              Eazaz Jakda
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
